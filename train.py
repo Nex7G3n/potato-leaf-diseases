@@ -105,6 +105,7 @@ def main(args):
 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     train(model, train_loader, val_loader, epochs=args.epochs, device=device)
+    torch.save(model.state_dict(), "potato_leaf_disease_model.pth")
 
 
 if __name__ == "__main__":
