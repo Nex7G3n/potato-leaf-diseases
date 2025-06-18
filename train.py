@@ -1,20 +1,27 @@
 import os
 import zipfile
+import json
 from pathlib import Path
 import argparse
-
 import torch
 from torch import nn, optim
 from torch.utils.data import DataLoader, random_split
 from torchvision import datasets, transforms, models
 
-try:
-    from kaggle.api.kaggle_api_extended import KaggleApi
-except ImportError:
-    KaggleApi = None
-
 DATASET_SLUG = "warcoder/potato-leaf-disease-dataset"
 DATASET_DIRNAME = "Potato Leaf Disease Dataset in Uncontrolled Environment"
+
+def authenticate_kaggle():
+    """Carga kaggle.json desde el proyecto y configura las variables de entorno."""
+    kaggle_path = Path("kaggle.json")
+    if not kaggle_path.exists():
+        raise FileNotFoundError("No se encontró kaggle.json en el directorio actual.")
+    
+    with open(kaggle_path, "r") as f:
+        kaggle_token = json.load(f)
+    
+    os.environ["KAGGLE_USERNAME"] = kaggle_token["username"]
+    os.environ["KAGGLE_KEY"] = kaggle_token["key"]
 
 
 def download_dataset(root: Path):
@@ -24,11 +31,15 @@ def download_dataset(root: Path):
         print(f"Dataset already exists in {dataset_path}")
         return dataset_path
 
-    if KaggleApi is None:
-        raise RuntimeError("kaggle package is required to download dataset")
+    # 🔄 Paso 1: Cargar las credenciales manualmente
+    authenticate_kaggle()
+
+    # 🔄 Paso 2: Importar KaggleApi luego de haber cargado las variables de entorno
+    from kaggle.api.kaggle_api_extended import KaggleApi
 
     api = KaggleApi()
     api.authenticate()
+
     root.mkdir(parents=True, exist_ok=True)
     print("Downloading dataset from Kaggle…")
     api.dataset_download_files(DATASET_SLUG, path=str(root), unzip=True)
