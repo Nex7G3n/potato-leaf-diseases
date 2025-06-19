@@ -15,3 +15,13 @@ This repository provides a simple script to train a convolutional neural network
    ```
 
 The dataset will be downloaded automatically the first time you run the script.
+
+## Streamlit Interface
+
+To try a simple web interface for disease detection, run:
+
+```bash
+streamlit run app.py
+```
+
+Upload an image of a potato leaf and the model will predict the disease class.
