@@ -77,6 +77,25 @@ def plot_accuracy_per_model(accuracies, model_names, save_path):
     plt.close()
     print(f"Gráfico de exactitud por modelo guardado en {save_path / 'accuracy_per_model.png'}")
 
+def plot_training_time_comparison(histories, model_names, save_path):
+    plt.figure(figsize=(10, 6))
+    training_times = [h['training_time'] for h in histories if 'training_time' in h]
+    valid_model_names = [model_names[i] for i, h in enumerate(histories) if 'training_time' in h]
+
+    if not training_times:
+        print("No se encontraron tiempos de entrenamiento para comparar.")
+        return
+
+    bars = plt.bar(valid_model_names, training_times, color='lightgreen')
+    plt.ylabel('Tiempo de Entrenamiento (segundos)')
+    plt.title('Tiempo de Entrenamiento por Modelo')
+    for bar in bars:
+        yval = bar.get_height()
+        plt.text(bar.get_x() + bar.get_width()/2, yval + 0.5, f"{yval:.2f}s", ha='center', va='bottom')
+    plt.savefig(save_path / "training_time_comparison.png")
+    plt.close()
+    print(f"Gráfico de tiempo de entrenamiento comparativo guardado en {save_path / 'training_time_comparison.png'}")
+
 def plot_prediction_correlation_matrix(predictions_list, model_names, class_names, save_path):
     if len(predictions_list) < 2:
         print("Se necesitan al menos dos conjuntos de predicciones para calcular la correlación.")
@@ -119,7 +138,8 @@ def main():
     # Definir los modelos y sus archivos
     models_info = [
         {'name': 'ResNet18', 'history_file': 'training_history_potato_leaf_disease_model_resnet18.json', 'eval_file': 'evaluation_results_potato_leaf_disease_model_resnet18.json'},
-        {'name': 'ResNet50', 'history_file': 'training_history_potato_leaf_disease_model_resnet50.json', 'eval_file': 'evaluation_results_potato_leaf_disease_model_resnet50.json'}
+        {'name': 'ResNet50', 'history_file': 'training_history_potato_leaf_disease_model_resnet50.json', 'eval_file': 'evaluation_results_potato_leaf_disease_model_resnet50.json'},
+        {'name': 'DenseNet121', 'history_file': 'training_history_potato_leaf_disease_model_densenet121.json', 'eval_file': 'evaluation_results_potato_leaf_disease_model_densenet121.json'}
     ]
 
     all_histories = []
@@ -178,13 +198,38 @@ def main():
         plot_accuracy_per_model(all_accuracies, valid_model_names_eval, results_dir)
         plot_error_histogram(all_correct_predictions_for_hist, valid_model_names_eval, results_dir)
         
+        class_names = valid_eval_results[0]['class_names'] # Asumimos que los nombres de las clases son los mismos para todos los modelos
+
+        # Generar matrices de correlación para cada par de modelos
         if len(all_predictions) >= 2:
-            # Asumiendo que el primer modelo es ResNet18 y el segundo es ResNet50
-            # Necesitamos los nombres de las clases de uno de los modelos (deberían ser los mismos)
-            class_names = valid_eval_results[0]['class_names']
-            plot_prediction_correlation_matrix(all_predictions, valid_model_names_eval, class_names, results_dir)
+            for i in range(len(all_predictions)):
+                for j in range(i + 1, len(all_predictions)):
+                    model1_preds = all_predictions[i]
+                    model2_preds = all_predictions[j]
+                    model1_name = valid_model_names_eval[i]
+                    model2_name = valid_model_names_eval[j]
+                    
+                    # Asegurarse de que las predicciones tienen la misma longitud
+                    min_len = min(len(model1_preds), len(model2_preds))
+                    model1_preds = model1_preds[:min_len]
+                    model2_preds = model2_preds[:min_len]
+
+                    cross_confusion = confusion_matrix(model1_preds, model2_preds, labels=range(len(class_names)))
+
+                    plt.figure(figsize=(12, 10))
+                    sns.heatmap(cross_confusion, annot=True, fmt="d", cmap="viridis", 
+                                xticklabels=class_names, yticklabels=class_names)
+                    plt.xlabel(f"Predicciones de {model2_name}")
+                    plt.ylabel(f"Predicciones de {model1_name}")
+                    plt.title(f'Matriz de Correlación de Predicciones: {model1_name} vs {model2_name}')
+                    plt.savefig(results_dir / f"prediction_correlation_matrix_{model1_name}_vs_{model2_name}.png")
+                    plt.close()
+                    print(f"Matriz de correlación de predicciones guardada en {results_dir / f'prediction_correlation_matrix_{model1_name}_vs_{model2_name}.png'}")
         else:
-            print("Advertencia: No hay suficientes resultados de evaluación para generar la matriz de correlación de predicciones.")
+            print("Advertencia: No hay suficientes resultados de evaluación para generar matrices de correlación de predicciones.")
+
+    if len(valid_histories) > 0:
+        plot_training_time_comparison(valid_histories, valid_model_names_hist, results_dir)
 
 
 if __name__ == "__main__":

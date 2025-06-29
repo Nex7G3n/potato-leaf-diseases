@@ -7,6 +7,7 @@ import torch
 from torch import nn, optim
 from torch.utils.data import DataLoader, random_split
 from torchvision import datasets, transforms, models
+import time
 
 DATASET_SLUG = "warcoder/potato-leaf-disease-dataset"
 DATASET_DIRNAME = "Potato Leaf Disease Dataset in Uncontrolled Environment"
@@ -82,14 +83,15 @@ def main(args):
     # Seleccionar la arquitectura del modelo
     if args.model_arch == 'resnet18':
         model = models.resnet18(pretrained=True)
+        model.fc = nn.Linear(model.fc.in_features, num_classes)
     elif args.model_arch == 'resnet50':
         model = models.resnet50(pretrained=True)
+        model.fc = nn.Linear(model.fc.in_features, num_classes)
     elif args.model_arch == 'densenet121':
         model = models.densenet121(pretrained=True)
+        model.classifier = nn.Linear(model.classifier.in_features, num_classes)
     else:
         raise ValueError(f"Arquitectura de modelo no soportada: {args.model_arch}")
-
-    model.fc = nn.Linear(model.fc.in_features, num_classes)
 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     model.to(device) # Mover el modelo al dispositivo antes de inicializar el optimizador
@@ -101,9 +103,11 @@ def main(args):
     history = {
         'train_loss': [],
         'val_loss': [],
-        'val_acc': []
+        'val_acc': [],
+        'training_time': 0.0
     }
 
+    start_time = time.time()
     for epoch in range(1, args.epochs + 1):
         model.train()
         train_loss = 0.0
@@ -136,6 +140,11 @@ def main(args):
         history['val_acc'].append(val_acc)
         
         print(f"Epoch {epoch}: Train Loss {train_loss:.4f} | Val Loss {val_loss:.4f} | Val Acc {val_acc:.4f}")
+
+    end_time = time.time()
+    total_training_time = end_time - start_time
+    history['training_time'] = total_training_time
+    print(f"Tiempo total de entrenamiento: {total_training_time:.2f} segundos")
 
     torch.save(model.state_dict(), Path("models") / args.output_model_name)
     

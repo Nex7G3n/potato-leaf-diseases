@@ -138,14 +138,15 @@ def main(args):
     # Seleccionar la arquitectura del modelo
     if args.model_arch == 'resnet18':
         model = models.resnet18(pretrained=False)
+        model.fc = nn.Linear(model.fc.in_features, num_classes)
     elif args.model_arch == 'resnet50':
         model = models.resnet50(pretrained=False)
+        model.fc = nn.Linear(model.fc.in_features, num_classes)
     elif args.model_arch == 'densenet121':
         model = models.densenet121(pretrained=False)
+        model.classifier = nn.Linear(model.classifier.in_features, num_classes)
     else:
         raise ValueError(f"Arquitectura de modelo no soportada: {args.model_arch}")
-
-    model.fc = nn.Linear(model.fc.in_features, num_classes)
 
     # Cargar el modelo entrenado
     model_path = Path(args.model_path)
