@@ -81,12 +81,12 @@ def create_dataloaders(data_dir: Path, batch_size: int = 32, val_split: float = 
     return val_loader, dataset.classes
 
 
-def evaluate_model(model, val_loader, device, class_names):
+def evaluate_model(model, val_loader, device, class_names, model_arch_name):
     model.eval()
     model.to(device)
     all_preds = []
     all_labels = []
-    all_correct_predictions = [] # Para el histograma de errores individuales
+    all_correct_predictions = []
 
     with torch.no_grad():
         for inputs, labels in val_loader:
@@ -96,33 +96,36 @@ def evaluate_model(model, val_loader, device, class_names):
             
             all_preds.extend(preds.cpu().numpy())
             all_labels.extend(labels.cpu().numpy())
-            all_correct_predictions.extend((preds == labels).cpu().numpy()) # 1 si es correcto, 0 si es incorrecto
+            all_correct_predictions.extend((preds == labels).cpu().numpy())
 
-    # Calcular y mostrar la matriz de confusión
+    # Calcular y guardar la matriz de confusión
     cm = confusion_matrix(all_labels, all_preds)
-    print("\nMatriz de Confusión:")
+    print(f"\nMatriz de Confusión para {model_arch_name}:")
     print(cm)
 
     plt.figure(figsize=(10, 8))
     sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=class_names, yticklabels=class_names)
     plt.xlabel("Predicción")
     plt.ylabel("Etiqueta Verdadera")
-    plt.title("Matriz de Confusión")
-    plt.savefig(Path("results") / "confusion_matrix.png")
-    print("\nMatriz de Confusión guardada como results/confusion_matrix.png")
+    plt.title(f"Matriz de Confusión para {model_arch_name}")
+    cm_filename = f"confusion_matrix_{model_arch_name.lower()}.png"
+    plt.savefig(Path("results") / cm_filename)
+    plt.close() # Cierra la figura para liberar memoria
+    print(f"\nMatriz de Confusión guardada como results/{cm_filename}")
 
-    # Calcular y mostrar el reporte de clasificación
+    # Calcular y guardar el reporte de clasificación
     report = classification_report(all_labels, all_preds, target_names=class_names)
-    print("\nReporte de Clasificación:")
+    print(f"\nReporte de Clasificación para {model_arch_name}:")
     print(report)
 
-    with open(Path("results") / "classification_report.txt", "w") as f:
+    report_filename = f"classification_report_{model_arch_name.lower()}.txt"
+    with open(Path("results") / report_filename, "w") as f:
         f.write(report)
-    print("\nReporte de Clasificación guardado como results/classification_report.txt")
+    print(f"\nReporte de Clasificación guardado como results/{report_filename}")
 
     # Calcular precisión general
     accuracy = np.sum(np.array(all_preds) == np.array(all_labels)) / len(all_labels)
-    print(f"\nPrecisión General (Accuracy): {accuracy:.4f}")
+    print(f"\nPrecisión General (Accuracy) para {model_arch_name}: {accuracy:.4f}")
     
     return all_labels, all_preds, all_correct_predictions
 
@@ -135,18 +138,20 @@ def main(args):
 
     num_classes = len(class_names)
     
+    model_arch_name = args.model_arch # Obtener el nombre de la arquitectura del modelo
+
     # Seleccionar la arquitectura del modelo
-    if args.model_arch == 'resnet18':
+    if model_arch_name == 'resnet18':
         model = models.resnet18(pretrained=False)
         model.fc = nn.Linear(model.fc.in_features, num_classes)
-    elif args.model_arch == 'resnet50':
+    elif model_arch_name == 'resnet50':
         model = models.resnet50(pretrained=False)
         model.fc = nn.Linear(model.fc.in_features, num_classes)
-    elif args.model_arch == 'densenet121':
+    elif model_arch_name == 'densenet121':
         model = models.densenet121(pretrained=False)
         model.classifier = nn.Linear(model.classifier.in_features, num_classes)
     else:
-        raise ValueError(f"Arquitectura de modelo no soportada: {args.model_arch}")
+        raise ValueError(f"Arquitectura de modelo no soportada: {model_arch_name}")
 
     # Cargar el modelo entrenado
     model_path = Path(args.model_path)
@@ -157,7 +162,7 @@ def main(args):
     model.load_state_dict(torch.load(model_path, map_location=device))
     print(f"Modelo cargado exitosamente desde {model_path}")
 
-    all_labels, all_preds, all_correct_predictions = evaluate_model(model, val_loader, device, class_names)
+    all_labels, all_preds, all_correct_predictions = evaluate_model(model, val_loader, device, class_names, model_arch_name)
     
     # Convertir a arrays de numpy para facilitar el procesamiento y luego a listas para JSON
     all_labels = np.array(all_labels).tolist()
