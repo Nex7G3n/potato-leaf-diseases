@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
 from sklearn.metrics import confusion_matrix
+from statsmodels.stats.contingency_tables import mcnemar
 
 def load_json_data(filepath):
     with open(filepath, 'r') as f:
@@ -131,6 +132,61 @@ def plot_prediction_correlation_matrix(predictions_list, model_names, class_name
     plt.close()
     print(f"Matriz de correlación de predicciones guardada en {save_path / 'prediction_correlation_matrix.png'}")
 
+def perform_mcnemar_test(model1_correct_preds, model2_correct_preds, model1_name, model2_name):
+    # Asegurarse de que las listas tienen la misma longitud
+    min_len = min(len(model1_correct_preds), len(model2_correct_preds))
+    model1_correct_preds = np.array(model1_correct_preds[:min_len])
+    model2_correct_preds = np.array(model2_correct_preds[:min_len])
+
+    # Construir la tabla de contingencia 2x2 para McNemar's test
+    # a: Model1 Correct, Model2 Incorrect
+    # b: Model1 Incorrect, Model2 Correct
+    # c: Model1 Correct, Model2 Correct
+    # d: Model1 Incorrect, Model2 Incorrect
+    
+    # Convertir a booleanos para facilitar la comparación
+    model1_correct = model1_correct_preds.astype(bool)
+    model2_correct = model2_correct_preds.astype(bool)
+
+    n00 = np.sum(~model1_correct & ~model2_correct) # Ambos incorrectos
+    n01 = np.sum(~model1_correct & model2_correct)  # M1 incorrecto, M2 correcto
+    n10 = np.sum(model1_correct & ~model2_correct)  # M1 correcto, M2 incorrecto
+    n11 = np.sum(model1_correct & model2_correct)   # Ambos correctos
+
+    # La tabla para McNemar's test es:
+    # [[n11, n10],
+    #  [n01, n00]]
+    # O a veces se presenta como:
+    # [[correct_model1_correct_model2, correct_model1_incorrect_model2],
+    #  [incorrect_model1_correct_model2, incorrect_model1_incorrect_model2]]
+    # statsmodels espera [[n11, n10], [n01, n00]]
+    table = [[n11, n10],
+             [n01, n00]]
+
+    print(f"\nRealizando la Prueba de McNemar para {model1_name} vs {model2_name}:")
+    print(f"Tabla de Contingencia:\n{np.array(table)}")
+
+    mcnemar_results = {}
+    try:
+        result = mcnemar(table, exact=False) # exact=False para usar la aproximación chi-cuadrado para muestras grandes
+        mcnemar_results['statistic'] = result.statistic
+        mcnemar_results['pvalue'] = result.pvalue
+        
+        print(f"Estadístico Chi-cuadrado: {result.statistic:.4f}")
+        print(f"Valor p: {result.pvalue:.4f}")
+        
+        if result.pvalue < 0.05:
+            print(f"Conclusión: Hay una diferencia significativa entre {model1_name} y {model2_name} (p < 0.05).")
+            mcnemar_results['conclusion'] = f"Hay una diferencia significativa entre {model1_name} y {model2_name} (p < 0.05)."
+        else:
+            print(f"Conclusión: No hay una diferencia significativa entre {model1_name} y {model2_name} (p >= 0.05).")
+            mcnemar_results['conclusion'] = f"No hay una diferencia significativa entre {model1_name} y {model2_name} (p >= 0.05)."
+    except ValueError as e:
+        print(f"No se pudo realizar la prueba de McNemar: {e}")
+        mcnemar_results['error'] = str(e)
+    print("-" * 50)
+    return mcnemar_results
+
 
 def main():
     results_dir = Path("results")
@@ -227,6 +283,33 @@ def main():
                     print(f"Matriz de correlación de predicciones guardada en {results_dir / f'prediction_correlation_matrix_{model1_name}_vs_{model2_name}.png'}")
         else:
             print("Advertencia: No hay suficientes resultados de evaluación para generar matrices de correlación de predicciones.")
+
+        # Realizar la Prueba de McNemar para cada par de modelos
+        mcnemar_results_list = []
+        if len(valid_eval_results) >= 2:
+            print("\n--- Resultados de la Prueba de McNemar ---")
+            for i in range(len(valid_eval_results)):
+                for j in range(i + 1, len(valid_eval_results)):
+                    model1_correct_preds = valid_eval_results[i]['correct_predictions']
+                    model2_correct_preds = valid_eval_results[j]['correct_predictions']
+                    model1_name = valid_model_names_eval[i]
+                    model2_name = valid_model_names_eval[j]
+                    
+                    mcnemar_result = perform_mcnemar_test(model1_correct_preds, model2_correct_preds, model1_name, model2_name)
+                    mcnemar_results_list.append({
+                        'model1': model1_name,
+                        'model2': model2_name,
+                        'results': mcnemar_result
+                    })
+            
+            # Guardar los resultados de McNemar en un archivo JSON
+            mcnemar_filename = results_dir / "mcnemar_test_results.json"
+            with open(mcnemar_filename, 'w') as f:
+                json.dump(mcnemar_results_list, f, indent=4)
+            print(f"Resultados de la Prueba de McNemar guardados en {mcnemar_filename}")
+
+        else:
+            print("Advertencia: No hay suficientes resultados de evaluación para realizar la Prueba de McNemar.")
 
     if len(valid_histories) > 0:
         plot_training_time_comparison(valid_histories, valid_model_names_hist, results_dir)

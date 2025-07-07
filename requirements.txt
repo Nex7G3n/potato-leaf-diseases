@@ -5,3 +5,5 @@ streamlit
 scikit-learn
 matplotlib
 seaborn
+reportlab
+statsmodels

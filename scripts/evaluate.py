@@ -7,7 +7,8 @@ import torch
 from torch import nn
 from torch.utils.data import DataLoader, random_split
 from torchvision import datasets, transforms, models
-from sklearn.metrics import confusion_matrix, classification_report
+from sklearn.metrics import confusion_matrix, classification_report, matthews_corrcoef
+from statsmodels.stats.contingency_tables import mcnemar
 import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
@@ -126,8 +127,12 @@ def evaluate_model(model, val_loader, device, class_names, model_arch_name):
     # Calcular precisión general
     accuracy = np.sum(np.array(all_preds) == np.array(all_labels)) / len(all_labels)
     print(f"\nPrecisión General (Accuracy) para {model_arch_name}: {accuracy:.4f}")
+
+    # Calcular y guardar el Coeficiente de Correlación de Matthews (MCC)
+    mcc = matthews_corrcoef(all_labels, all_preds)
+    print(f"\nCoeficiente de Correlación de Matthews (MCC) para {model_arch_name}: {mcc:.4f}")
     
-    return all_labels, all_preds, all_correct_predictions
+    return all_labels, all_preds, all_correct_predictions, mcc
 
 
 def main(args):
@@ -162,7 +167,7 @@ def main(args):
     model.load_state_dict(torch.load(model_path, map_location=device))
     print(f"Modelo cargado exitosamente desde {model_path}")
 
-    all_labels, all_preds, all_correct_predictions = evaluate_model(model, val_loader, device, class_names, model_arch_name)
+    all_labels, all_preds, all_correct_predictions, mcc = evaluate_model(model, val_loader, device, class_names, model_arch_name)
     
     # Convertir a arrays de numpy para facilitar el procesamiento y luego a listas para JSON
     all_labels = np.array(all_labels).tolist()
@@ -174,7 +179,8 @@ def main(args):
         'labels': all_labels,
         'predictions': all_preds,
         'correct_predictions': all_correct_predictions,
-        'class_names': class_names
+        'class_names': class_names,
+        'matthews_corrcoef': mcc
     }
     results_filename = f"evaluation_results_{Path(args.model_path).stem}.json"
     with open(Path("results") / results_filename, 'w') as f:

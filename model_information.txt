@@ -1,0 +1,58 @@
+Información del Modelo
+
+Este documento proporciona información sobre la arquitectura, implementación y características de los modelos de clasificación de enfermedades de las hojas de papa.
+
+1. ResNet18
+
+Arquitectura:
+ResNet18 es una red neuronal convolucional que utiliza conexiones residuales para mitigar el problema del desvanecimiento del gradiente en redes profundas. El modelo consta de varias capas convolucionales, capas de normalización por lotes, funciones de activación ReLU y capas de max-pooling. La característica clave de ResNet18 es el uso de bloques residuales, que permiten que el modelo aprenda asignaciones de identidad y entrene redes más profundas. La capa final es una capa totalmente conectada que mapea las características al número de clases.
+
+Implementación:
+El modelo ResNet18 se implementó utilizando PyTorch. El modelo se entrenó en el conjunto de datos de enfermedades de las hojas de papa en un entorno no controlado. El proceso de entrenamiento involucró los siguientes pasos:
+1.  Carga y preprocesamiento de datos: El conjunto de datos se descargó de Kaggle y se preprocesó utilizando torchvision.transforms. Las imágenes se redimensionaron a 224x224 píxeles y se normalizaron utilizando la media y la desviación estándar del conjunto de datos ImageNet.
+2.  Definición del modelo: El modelo ResNet18 se creó utilizando la función torchvision.models.resnet18. La capa totalmente conectada final se reemplazó con una nueva capa totalmente conectada que mapea las características al número de clases en el conjunto de datos de enfermedades de las hojas de papa.
+3.  Bucle de entrenamiento: El modelo se entrenó utilizando el optimizador Adam y la función de pérdida CrossEntropyLoss. El bucle de entrenamiento iteró sobre el conjunto de datos de entrenamiento durante un número especificado de épocas. Durante cada época, el modelo se entrenó en un lote de imágenes y se calculó la pérdida. Luego, se calcularon los gradientes y se utilizaron para actualizar los parámetros del modelo.
+4.  Validación: Después de cada época, el modelo se evaluó en el conjunto de datos de validación. La precisión de la validación se calculó y se utilizó para monitorear el proceso de entrenamiento.
+
+Características:
+*   Tamaño del modelo: El tamaño del modelo ResNet18 es relativamente pequeño en comparación con otros modelos de aprendizaje profundo.
+*   Complejidad computacional: La complejidad computacional de ResNet18 es moderada.
+*   Interpretabilidad: La interpretabilidad de ResNet18 es limitada debido a la profundidad de la red y las funciones de activación no lineales.
+*   Robustez: La robustez de ResNet18 depende de la calidad y diversidad de los datos de entrenamiento.
+
+Importancia y por qué usar ResNet18:
+ResNet18 es un buen punto de partida para problemas de clasificación de imágenes debido a su arquitectura relativamente simple y su buen rendimiento. Es adecuado para conjuntos de datos de tamaño moderado y puede entrenarse en hardware con recursos limitados.
+
+2. ResNet50
+
+Arquitectura:
+ResNet50 es una versión más profunda de ResNet18, con 50 capas. También utiliza conexiones residuales para mitigar el problema del desvanecimiento del gradiente. La arquitectura es similar a ResNet18, pero con más capas convolucionales y bloques residuales.
+
+Implementación:
+El modelo ResNet50 se implementó utilizando PyTorch, similar a ResNet18. La principal diferencia es el uso de torchvision.models.resnet50 para crear el modelo. El proceso de entrenamiento es el mismo que ResNet18.
+
+Características:
+*   Tamaño del modelo: El tamaño del modelo ResNet50 es mayor que ResNet18.
+*   Complejidad computacional: La complejidad computacional de ResNet50 es mayor que ResNet18.
+*   Interpretabilidad: La interpretabilidad de ResNet50 es limitada.
+*   Robustez: La robustez de ResNet50 depende de los datos de entrenamiento.
+
+Importancia y por qué usar ResNet50:
+ResNet50 es una versión más profunda de ResNet18 y puede lograr una mayor precisión en conjuntos de datos más grandes y complejos. Sin embargo, requiere más recursos computacionales y puede ser más propenso al sobreajuste.
+
+3. DenseNet121
+
+Arquitectura:
+DenseNet121 es una red neuronal convolucional que utiliza conexiones densas. En DenseNet, cada capa está conectada a todas las demás capas de forma directa. Esto ayuda a reducir el problema del desvanecimiento del gradiente y fomenta la reutilización de características.
+
+Implementación:
+El modelo DenseNet121 se implementó utilizando PyTorch. El modelo se creó utilizando la función torchvision.models.densenet121. La capa de clasificador final se reemplazó con una nueva capa lineal que mapea las características al número de clases en el conjunto de datos de enfermedades de las hojas de papa. El proceso de entrenamiento es similar a ResNet18 y ResNet50.
+
+Características:
+*   Tamaño del modelo: El tamaño del modelo DenseNet121 es moderado.
+*   Complejidad computacional: La complejidad computacional de DenseNet121 es moderada.
+*   Interpretabilidad: La interpretabilidad de DenseNet121 es limitada.
+*   Robustez: La robustez de DenseNet121 depende de los datos de entrenamiento.
+
+Importancia y por qué usar DenseNet121:
+DenseNet121 es útil cuando se requiere una alta eficiencia en el uso de parámetros y se busca mitigar el problema del desvanecimiento de gradientes. Es adecuado para conjuntos de datos con características complejas y puede lograr un buen rendimiento con menos parámetros en comparación con ResNet.
