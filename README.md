@@ -99,14 +99,14 @@ _Captura de pantalla de la página de Resultados de Evaluación._
 
 En esta sección, puedes subir una imagen de una hoja de patata. La aplicación utilizará los modelos entrenados para predecir la enfermedad presente y mostrará la clase detectada junto con el nivel de confianza y un gráfico de probabilidades por clase.
 
-![Screenshot of Image Prediction Page](images/Interfaz-03.png.png)
+![Screenshot of Image Prediction Page](images/Interfaz-03.png)
 _Captura de pantalla de la página de Predicción de Imagen._
 
 ### 4. Generar Reporte PDF
 
 Esta funcionalidad permite generar un informe PDF completo que consolida todos los resultados estadísticos y gráficos de evaluación del proyecto. El informe es útil para la documentación y el análisis fuera de la aplicación.
 
-![Screenshot of PDF Report Generation Page](images/Interfaz-04.pngpng)
+![Screenshot of PDF Report Generation Page](images/Interfaz-04.png)
 _Captura de pantalla de la página de Generación de Reporte PDF._
 
 ## Contribuciones 🤝
