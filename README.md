@@ -4,16 +4,17 @@ Este repositorio contiene un sistema completo para la detección y clasificació
 
 ## Características Principales ✨
 
-*   **Entrenamiento de Modelos:** Capacita modelos de redes neuronales convolucionales (CNN) como ResNet18, ResNet50 y DenseNet121 en el dataset de enfermedades de la hoja de patata.
-*   **Evaluación Exhaustiva:** Genera métricas de rendimiento detalladas, matrices de confusión, informes de clasificación y realiza pruebas estadísticas (e.g., Prueba de McNemar) para comparar el desempeño de los modelos.
-*   **Interfaz Web Interactiva (Streamlit):** Una aplicación web fácil de usar para cargar imágenes de hojas de patata y obtener predicciones instantáneas de los modelos entrenados.
-*   **Generación de Reportes PDF:** Crea informes PDF completos con todos los resultados estadísticos y gráficos de evaluación para una documentación y análisis sencillos.
+- **Entrenamiento de Modelos:** Capacita modelos de redes neuronales convolucionales (CNN) como ResNet18, ResNet50 y DenseNet121 en el dataset de enfermedades de la hoja de patata.
+- **Evaluación Exhaustiva:** Genera métricas de rendimiento detalladas, matrices de confusión, informes de clasificación y realiza pruebas estadísticas (e.g., Prueba de McNemar) para comparar el desempeño de los modelos.
+- **Interfaz Web Interactiva (Streamlit):** Una aplicación web fácil de usar para cargar imágenes de hojas de patata y obtener predicciones instantáneas de los modelos entrenados.
+- **Generación de Reportes PDF:** Crea informes PDF completos con todos los resultados estadísticos y gráficos de evaluación para una documentación y análisis sencillos.
 
 ## Configuración del Entorno 🛠️
 
 Para poner en marcha el proyecto, sigue estos pasos:
 
 1.  **Clonar el Repositorio:**
+
     ```bash
     git clone https://github.com/Nex7G3n/potato-leaf-diseases.git
     cd potato-leaf-diseases
@@ -21,6 +22,7 @@ Para poner en marcha el proyecto, sigue estos pasos:
 
 2.  **Instalar Dependencias:**
     Asegúrate de tener Python 3.8+ instalado. Luego, instala todas las librerías necesarias:
+
     ```bash
     pip install -r requirements.txt
     ```
@@ -30,12 +32,12 @@ Para poner en marcha el proyecto, sigue estos pasos:
 
 ## Estructura del Proyecto 📂
 
-*   `app.py`: El script principal de la aplicación web Streamlit.
-*   `data/`: Directorio donde se almacenará el dataset de imágenes.
-*   `models/`: Contiene los modelos entrenados (`.pth`).
-*   `results/`: Almacena todos los gráficos de evaluación, informes y resultados estadísticos.
-*   `scripts/`: Scripts para el entrenamiento (`train.py`), evaluación (`evaluate.py`) y visualización de resultados (`plot_results.py`).
-*   `requirements.txt`: Lista de dependencias de Python.
+- `app.py`: El script principal de la aplicación web Streamlit.
+- `data/`: Directorio donde se almacenará el dataset de imágenes.
+- `models/`: Contiene los modelos entrenados (`.pth`).
+- `results/`: Almacena todos los gráficos de evaluación, informes y resultados estadísticos.
+- `scripts/`: Scripts para el entrenamiento (`train.py`), evaluación (`evaluate.py`) y visualización de resultados (`plot_results.py`).
+- `requirements.txt`: Lista de dependencias de Python.
 
 ## Entrenamiento de Modelos 🚀
 
@@ -44,9 +46,10 @@ Para entrenar los modelos en el dataset de enfermedades de la hoja de patata, ej
 ```bash
 python scripts/train.py --data-dir data --epochs 10 --model-name resnet18 # o resnet50, densenet121
 ```
-*   `--data-dir`: Ruta al directorio donde se guardará o ya se encuentra el dataset.
-*   `--epochs`: Número de épocas para el entrenamiento.
-*   `--model-name`: Especifica la arquitectura del modelo a entrenar (e.g., `resnet18`, `resnet50`, `densenet121`).
+
+- `--data-dir`: Ruta al directorio donde se guardará o ya se encuentra el dataset.
+- `--epochs`: Número de épocas para el entrenamiento.
+- `--model-name`: Especifica la arquitectura del modelo a entrenar (e.g., `resnet18`, `resnet50`, `densenet121`).
 
 ## Evaluación de Modelos 📊
 
@@ -55,6 +58,7 @@ Después de entrenar los modelos, puedes evaluarlos y generar métricas de rendi
 ```bash
 python scripts/evaluate.py --data-dir data --model-name resnet18 # o resnet50, densenet121
 ```
+
 Este script generará informes de clasificación, matrices de confusión y archivos JSON con métricas detalladas en el directorio `results/`.
 
 Para generar gráficos adicionales de comparación y la prueba de McNemar, ejecuta:
@@ -62,6 +66,7 @@ Para generar gráficos adicionales de comparación y la prueba de McNemar, ejecu
 ```bash
 python scripts/plot_results.py
 ```
+
 Este script creará varios archivos `.png` y un archivo `mcnemar_test_results.json` en el directorio `results/`.
 
 ## Interfaz Web Interactiva (Streamlit) 🌐
@@ -80,29 +85,29 @@ Una vez iniciada, la aplicación se abrirá en tu navegador web. La interfaz est
 
 Esta sección proporciona una bienvenida, información general sobre el proyecto, detalles del dataset utilizado (incluyendo una distribución de clases) y descripciones de las arquitecturas de los modelos (ResNet18, ResNet50, DenseNet121).
 
-![Screenshot of Home and Models Page](images/streamlit_home_models.png)
-*Captura de pantalla de la página de Inicio y Modelos.*
+![Screenshot of Home and Models Page](images/Interfaz-01.png)
+_Captura de pantalla de la página de Inicio y Modelos._
 
 ### 2. Resultados de Evaluación
 
 Aquí se muestran los resultados detallados de la evaluación de cada modelo, incluyendo matrices de confusión, informes de clasificación, el Coeficiente de Correlación de Matthews (MCC) y los resultados de la Prueba de McNemar. También se presentan gráficos comparativos de rendimiento.
 
-![Screenshot of Evaluation Results Page](images/streamlit_evaluation_results.png)
-*Captura de pantalla de la página de Resultados de Evaluación.*
+![Screenshot of Evaluation Results Page](images/Interfaz-02.png)
+_Captura de pantalla de la página de Resultados de Evaluación._
 
 ### 3. Predicción de Imagen
 
 En esta sección, puedes subir una imagen de una hoja de patata. La aplicación utilizará los modelos entrenados para predecir la enfermedad presente y mostrará la clase detectada junto con el nivel de confianza y un gráfico de probabilidades por clase.
 
-![Screenshot of Image Prediction Page](images/streamlit_image_prediction.png)
-*Captura de pantalla de la página de Predicción de Imagen.*
+![Screenshot of Image Prediction Page](images/Interfaz-03.png.png)
+_Captura de pantalla de la página de Predicción de Imagen._
 
 ### 4. Generar Reporte PDF
 
 Esta funcionalidad permite generar un informe PDF completo que consolida todos los resultados estadísticos y gráficos de evaluación del proyecto. El informe es útil para la documentación y el análisis fuera de la aplicación.
 
-![Screenshot of PDF Report Generation Page](images/streamlit_pdf_report.png)
-*Captura de pantalla de la página de Generación de Reporte PDF.*
+![Screenshot of PDF Report Generation Page](images/Interfaz-04.pngpng)
+_Captura de pantalla de la página de Generación de Reporte PDF._
 
 ## Contribuciones 🤝
 
