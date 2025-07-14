@@ -338,7 +338,7 @@ def main():
             st.info("Generando reporte PDF... Esto puede tomar un momento.")
             # Call the PDF generation function here
             generate_pdf_report()
-            st.success("Reporte PDF generado exitosamente. Puedes encontrarlo en la carpeta 'results'.")
+            st.success("Reporte PDF generado exitosamente.")
             st.download_button(
                 label="Descargar Reporte PDF",
                 data=open("results/reporte_enfermedades_patata.pdf", "rb").read(),
