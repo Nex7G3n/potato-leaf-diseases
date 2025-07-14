@@ -92,8 +92,8 @@ def main():
 
         st.subheader('Información del Dataset')
         st.markdown("""
-            Los modelos fueron entrenados con el **"Potato Leaf Disease Dataset in Uncontrolled Environment"**.
-            Este dataset contiene imágenes de hojas de patata clasificadas en diferentes categorías de enfermedades y hojas sanas.
+            Los modelos fueron entrenados con el **"Potato Leaf Disease Dataset in Uncontrolled Environment"**
+            https://www.kaggle.com/datasets/warcoder/potato-leaf-disease-dataset .Este dataset contiene imágenes de hojas de patata clasificadas en diferentes categorías de enfermedades y hojas sanas.
             A continuación, se muestra la distribución de las clases en el dataset:
         """)
         dataset_info = {

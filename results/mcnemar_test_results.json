@@ -3,8 +3,8 @@
         "model1": "ResNet18",
         "model2": "ResNet50",
         "results": {
-            "statistic": 0.03333333333333333,
-            "pvalue": 0.8551321405847059,
+            "statistic": 1.7608695652173914,
+            "pvalue": 0.18451609080340636,
             "conclusion": "No hay una diferencia significativa entre ResNet18 y ResNet50 (p >= 0.05)."
         }
     },
@@ -12,8 +12,8 @@
         "model1": "ResNet18",
         "model2": "DenseNet121",
         "results": {
-            "statistic": 0.972972972972973,
-            "pvalue": 0.3239398455985313,
+            "statistic": 0.625,
+            "pvalue": 0.42919530044034926,
             "conclusion": "No hay una diferencia significativa entre ResNet18 y DenseNet121 (p >= 0.05)."
         }
     },
@@ -21,8 +21,8 @@
         "model1": "ResNet50",
         "model2": "DenseNet121",
         "results": {
-            "statistic": 0.41025641025641024,
-            "pvalue": 0.5218393903336151,
+            "statistic": 0.18,
+            "pvalue": 0.6713732405408727,
             "conclusion": "No hay una diferencia significativa entre ResNet50 y DenseNet121 (p >= 0.05)."
         }
     }
