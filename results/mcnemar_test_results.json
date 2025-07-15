@@ -5,7 +5,7 @@
         "results": {
             "statistic": 1.7608695652173914,
             "pvalue": 0.18451609080340636,
-            "conclusion": "No hay una diferencia significativa entre ResNet18 y ResNet50 (p >= 0.05)."
+            "conclusion": "Il n'y a pas de diff\u00e9rence significative entre ResNet18 y ResNet50 (p >= 0.05)."
         }
     },
     {
@@ -14,7 +14,7 @@
         "results": {
             "statistic": 0.625,
             "pvalue": 0.42919530044034926,
-            "conclusion": "No hay una diferencia significativa entre ResNet18 y DenseNet121 (p >= 0.05)."
+            "conclusion": "Il n'y a pas de diff\u00e9rence significative entre ResNet18 y DenseNet121 (p >= 0.05)."
         }
     },
     {
@@ -23,7 +23,7 @@
         "results": {
             "statistic": 0.18,
             "pvalue": 0.6713732405408727,
-            "conclusion": "No hay una diferencia significativa entre ResNet50 y DenseNet121 (p >= 0.05)."
+            "conclusion": "Il n'y a pas de diff\u00e9rence significative entre ResNet50 y DenseNet121 (p >= 0.05)."
         }
     }
 ]

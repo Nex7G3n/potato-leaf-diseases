@@ -1,0 +1,1112 @@
+{
+    "app_title": {
+        "en": "Potato Leaf Disease Detector",
+        "es": "Detector de Enfermedades de la Hoja de Patata",
+        "fr": "Détecteur de Maladies des Feuilles de Pomme de Terre",
+        "de": "Kartoffelblattkrankheitsdetektor"
+    },
+    "navigation_title": {
+        "en": "Navigation",
+        "es": "Navegación",
+        "fr": "Navigation",
+        "de": "Navigation"
+    },
+    "page_home_models": {
+        "en": "Home & Models",
+        "es": "Inicio y Modelos",
+        "fr": "Accueil et Modèles",
+        "de": "Startseite & Modelle"
+    },
+    "page_evaluation_results": {
+        "en": "Evaluation Results",
+        "es": "Resultados de Evaluación",
+        "fr": "Résultats d'Évaluation",
+        "de": "Evaluierungsergebnisse"
+    },
+    "page_image_prediction": {
+        "en": "Image Prediction",
+        "es": "Predicción de Imagen",
+        "fr": "Prédiction d'Image",
+        "de": "Bildvorhersage"
+    },
+    "page_generate_report": {
+        "en": "Generate PDF Report",
+        "es": "Generar Reporte PDF",
+        "fr": "Générer un Rapport PDF",
+        "de": "PDF-Bericht generieren"
+    },
+    "page_disease_info": {
+        "en": "Disease Information",
+        "es": "Información de Enfermedades",
+        "fr": "Informations sur les Maladies",
+        "de": "Krankheitsinformationen"
+    },
+    "page_recommendations": {
+        "en": "Recommendations",
+        "es": "Recomendaciones",
+        "fr": "Recommandations",
+        "de": "Empfehlungen"
+    },
+    "welcome_header": {
+        "en": "Welcome 👋 and General Information 📚",
+        "es": "Bienvenido 👋 y Información General 📚",
+        "fr": "Bienvenue 👋 et Informations Générales 📚",
+        "de": "Willkommen 👋 und Allgemeine Informationen 📚"
+    },
+    "welcome_text": {
+        "en": "This application uses deep learning models to detect diseases in potato leaves. Simply upload an image of a potato leaf and our models will help you identify possible diseases. Our goal is to provide a useful tool for farmers and agricultural enthusiasts to quickly identify crop problems and take timely action.",
+        "es": "Esta aplicación utiliza modelos de aprendizaje profundo para detectar enfermedades en las hojas de patata. Simplemente sube una imagen de una hoja de patata y nuestros modelos te ayudarán a identificar posibles enfermedades. Nuestro objetivo es proporcionar una herramienta útil para agricultores y entusiastas de la agricultura para identificar rápidamente problemas en los cultivos y tomar medidas oportunas.",
+        "fr": "Cette application utilise des modèles d'apprentissage profond pour détecter les maladies des feuilles de pomme de terre. Téléchargez simplement une image d'une feuille de pomme de terre et nos modèles vous aideront à identifier les maladies possibles. Notre objectif est de fournir un outil utile aux agriculteurs et aux passionnés d'agriculture pour identifier rapidement les problèmes de culture et prendre des mesures opportunes.",
+        "de": "Diese Anwendung verwendet Deep-Learning-Modelle, um Krankheiten an Kartoffelblättern zu erkennen. Laden Sie einfach ein Bild eines Kartoffelblatts hoch, und unsere Modelle helfen Ihnen, mögliche Krankheiten zu identifizieren. Unser Ziel ist es, Landwirten und Agrarbegeisterten ein nützliches Werkzeug zur schnellen Erkennung von Pflanzenproblemen und zur rechtzeitigen Maßnahmen zu bieten."
+    },
+    "explore_info": {
+        "en": "Explore the sections below to learn more about the dataset and models.",
+        "es": "Explora las secciones a continuación para conocer más sobre el dataset y los modelos.",
+        "fr": "Explorez les sections ci-dessous pour en savoir plus sur l'ensemble de données et les modèles.",
+        "de": "Erkunden Sie die folgenden Abschnitte, um mehr über den Datensatz und die Modelle zu erfahren."
+    },
+    "dataset_info_subheader": {
+        "en": "Dataset Information",
+        "es": "Información del Dataset",
+        "fr": "Informations sur l'Ensemble de Données",
+        "de": "Datensatzinformationen"
+    },
+    "dataset_description": {
+        "en": "The models were trained with the **\"Potato Leaf Disease Dataset in Uncontrolled Environment\"** https://www.kaggle.com/datasets/warcoder/potato-leaf-disease-dataset .This dataset contains images of potato leaves classified into different disease categories and healthy leaves. Below is the distribution of classes in the dataset:",
+        "es": "Los modelos fueron entrenados con el **\"Potato Leaf Disease Dataset in Uncontrolled Environment\"** https://www.kaggle.com/datasets/warcoder/potato-leaf-disease-dataset .Este dataset contiene imágenes de hojas de patata clasificadas en diferentes categorías de enfermedades y hojas sanas. A continuación, se muestra la distribución de las clases en el dataset:",
+        "fr": "Les modèles ont été entraînés avec le **\"Potato Leaf Disease Dataset in Uncontrolled Environment\"** https://www.kaggle.com/datasets/warcoder/potato-leaf-disease-dataset .Cet ensemble de données contient des images de feuilles de pomme de terre classées en différentes catégories de maladies et en feuilles saines. Voici la distribution des classes dans l'ensemble de données :",
+        "de": "Die Modelle wurden mit dem **\"Potato Leaf Disease Dataset in Uncontrolled Environment\"** https://www.kaggle.com/datasets/warcoder/potato-leaf-disease-dataset trainiert. Dieser Datensatz enthält Bilder von Kartoffelblättern, die in verschiedene Krankheitskategorien und gesunde Blätter eingeteilt sind. Unten ist die Verteilung der Klassen im Datensatz dargestellt:"
+    },
+    "class_distribution": {
+        "en": "Class Distribution:",
+        "es": "Distribución de Clases:",
+        "fr": "Distribution des Classes :",
+        "de": "Klassenverteilung:"
+    },
+    "neural_network_models_subheader": {
+        "en": "Neural Network Models Used",
+        "es": "Modelos de Red Neuronal Utilizados",
+        "fr": "Modèles de Réseaux Neuronaux Utilisés",
+        "de": "Verwendete Neuronale Netzwerkmodelle"
+    },
+    "models_description": {
+        "en": "We have employed three state-of-the-art convolutional neural network (CNN) architectures for potato leaf disease classification:",
+        "es": "Hemos empleado tres arquitecturas de redes neuronales convolucionales (CNN) de última generación para la clasificación de enfermedades en hojas de patata:",
+        "fr": "Nous avons utilisé trois architectures de réseaux neuronaux convolucionales (CNN) de dernière génération pour la classification de maladies en feuilles de pomme de terre:",
+        "de": "Wir haben drei hochmoderne Faltungsnetzwerk-Architekturen (CNN) zur Klassifizierung von Kartoffelblattkrankheiten eingesetzt:"
+    },
+    "details_for": {
+        "en": "Details for",
+        "es": "Detalles de",
+        "fr": "Détails pour",
+        "de": "Details für"
+    },
+    "resnet18_desc": {
+        "en": "**ResNet18** is a lighter version of the ResNet (Residual Networks) family. These networks introduce skip connections that allow the gradient to flow directly through multiple layers, which helps train very deep networks without vanishing gradient problems. ResNet18 is known for its efficiency and good performance.",
+        "es": "**ResNet18** es una versión más ligera de la familia ResNet (Residual Networks). Estas redes introducen conexiones de salto (skip connections) que permiten que el gradiente fluya directamente a través de múltiples capas, lo que ayuda a entrenar redes muy profundas sin problemas de desvanecimiento del gradiente. ResNet18 es conocida por su eficiencia y buen rendimiento.",
+        "fr": "**ResNet18** est une version plus légère de la famille ResNet (Residual Networks). Ces réseaux introduisent des connexions de saut (skip connections) qui permettent au gradient de circuler directement à travers plusieurs couches, ce qui aide à entraîner des réseaux très profonds sans problèmes de disparition du gradient. ResNet18 est connu pour son efficacité et ses bonnes performances.",
+        "de": "**ResNet18** ist eine leichtere Version der ResNet-Familie (Residual Networks). Diese Netzwerke führen Sprungverbindungen (Skip Connections) ein, die es dem Gradienten ermöglichen, direkt durch mehrere Schichten zu fließen, was hilft, sehr tiefe Netzwerke ohne Probleme des verschwindenden Gradienten zu trainieren. ResNet18 ist bekannt für seine Effizienz und gute Leistung."
+    },
+    "resnet50_desc": {
+        "en": "**ResNet50** is a deeper version of ResNet than ResNet18. It uses more layers and residual blocks, which allows it to learn more complex features and often achieve higher accuracy in image classification tasks, albeit with a higher computational cost.",
+        "es": "**ResNet50** es una versión más profunda de ResNet que ResNet18. Utiliza más capas y bloques residuales, lo que le permite aprender características más complejas y, a menudo, lograr una mayor precisión en tareas de clasificación de imágenes, aunque con un mayor costo computacional.",
+        "fr": "**ResNet50** est une version plus profonde de ResNet que ResNet18. Il utilise plus de couches et de blocs résiduels, ce qui lui permet d'apprendre des caractéristiques plus complexes et d'atteindre souvent une plus grande précision dans les tâches de classification d'images, bien qu'avec un coût de calcul plus élevé.",
+        "de": "**ResNet50** ist eine tiefere Version von ResNet als ResNet18. Es verwendet mehr Schichten und Residualblöcke, wodurch es komplexere Merkmale lernen und oft eine höhere Genauigkeit bei Bildklassifizierungsaufgaben erzielen kann, wenn auch mit höheren Rechenkosten."
+    },
+    "densenet121_desc": {
+        "en": "**DenseNet121** (Densely Connected Convolutional Networks) is an architecture that connects each layer with all subsequent layers in a \"feed-forward\" fashion. This means that the input to each layer consists of the output of all previous layers, which encourages feature reuse and reduces the number of parameters, improving information and gradient propagation.",
+        "es": "**DenseNet121** (Densely Connected Convolutional Networks) es una arquitectura que conecta cada capa con todas las capas posteriores en una moda de \"alimentación hacia adelante\". Esto significa que la entrada de cada capa consiste en la salida de todas las capas anteriores, lo que fomenta la reutilización de características y reduce el número de parámetros, mejorando la propagación de la información y el gradiente.",
+        "fr": "**DenseNet121** (Densely Connected Convolutional Networks) est une architecture qui connecte chaque couche avec toutes les couches suivantes de manière \"feed-forward\". Cela signifie que l'entrée de chaque couche est constituée de la sortie de toutes les couches précédentes, ce qui favorise la réutilisation des caractéristiques et réduit le nombre de paramètres, améliorant la propagation de l'information et du gradient.",
+        "de": "**DenseNet121** (Densely Connected Convolutional Networks) ist eine Architektur, die jede Schicht mit allen nachfolgenden Schichten in einer \"Feed-Forward\"-Weise verbindet. Dies bedeutet, dass die Eingabe jeder Schicht aus der Ausgabe aller vorherigen Schichten besteht, was die Wiederverwendung von Merkmalen fördert und die Anzahl der Parameter reduziert, wodurch die Informations- und Gradientenpropagation verbessert wird."
+    },
+    "evaluation_results_header": {
+        "en": "Model Evaluation Results 📊",
+        "es": "Resultados de Evaluación de los Modelos 📊",
+        "fr": "Résultats d'Évaluation des Modèles 📊",
+        "de": "Modell-Evaluierungsergebnisse 📊"
+    },
+    "evaluation_results_description": {
+        "en": "Here you can see the metrics and performance graphs of the trained models.",
+        "es": "Aquí puedes ver las métricas y gráficos de rendimiento de los modelos entrenados.",
+        "fr": "Ici, vous pouvez voir les métriques et les graphiques de performance des modèles entraînés.",
+        "de": "Hier sehen Sie die Metriken und Leistungsdiagramme der trainierten Modelle."
+    },
+    "detailed_results_for": {
+        "en": "Detailed Results for",
+        "es": "Resultados Detallados para",
+        "fr": "Résultats Détaillés pour",
+        "de": "Detaillierte Ergebnisse für"
+    },
+    "confusion_matrix_for": {
+        "en": "Confusion Matrix for",
+        "es": "Matriz de Confusión para",
+        "fr": "Matrice de Confusion pour",
+        "de": "Konfusionsmatrix für"
+    },
+    "no_confusion_matrix": {
+        "en": "No confusion matrix found for",
+        "es": "No se encontró la matriz de confusión para",
+        "fr": "Aucune matrice de confusion trouvée pour",
+        "de": "Keine Konfusionsmatrix gefunden für"
+    },
+    "classification_report_for": {
+        "en": "Classification Report for",
+        "es": "Informe de Clasificación para",
+        "fr": "Rapport de Classification pour",
+        "de": "Klassifizierungsbericht für"
+    },
+    "no_classification_report": {
+        "en": "No classification report found for",
+        "es": "No se encontró el informe de clasificación para",
+        "fr": "Aucun rapport de classification trouvé pour",
+        "de": "Kein Klassifizierungsbericht gefunden für"
+    },
+    "matthews_corrcoef_for": {
+        "en": "Matthews Correlation Coefficient (MCC) for",
+        "es": "Coeficiente de Matthews (MCC) para",
+        "fr": "Coefficient de Corrélation de Matthews (MCC) pour",
+        "de": "Matthews Korrelationskoeffizient (MCC) für"
+    },
+    "no_matthews_corrcoef": {
+        "en": "No Matthews Coefficient found for",
+        "es": "No se encontró el Coeficiente de Matthews para",
+        "fr": "Aucun Coefficient de Matthews trouvé pour",
+        "de": "Kein Matthews-Koeffizient gefunden für"
+    },
+    "no_evaluation_results": {
+        "en": "No evaluation results found for",
+        "es": "No se encontraron resultados de evaluación para",
+        "fr": "Aucun résultat d'évaluation trouvé pour",
+        "de": "Keine Evaluierungsergebnisse gefunden für"
+    },
+    "mcnemar_test_subheader": {
+        "en": "McNemar's Test Results for Model Comparison:",
+        "es": "Resultados de la Prueba de McNemar para Comparación de Modelos:",
+        "fr": "Résultats du Test de McNemar pour la Comparaison de Modèles :",
+        "de": "McNemar-Testergebnisse für den Modellvergleich:"
+    },
+    "comparison": {
+        "en": "Comparison:",
+        "es": "Comparación:",
+        "fr": "Comparaison :",
+        "de": "Vergleich:"
+    },
+    "chi_squared_statistic": {
+        "en": "Chi-squared Statistic:",
+        "es": "Estadístico Chi-cuadrado:",
+        "fr": "Statistique du Chi-carré :",
+        "de": "Chi-Quadrat-Statistik:"
+    },
+    "p_value": {
+        "en": "p-value:",
+        "es": "Valor p:",
+        "fr": "Valeur p :",
+        "de": "p-Wert:"
+    },
+    "conclusion": {
+        "en": "Conclusion:",
+        "es": "Conclusión:",
+        "fr": "Conclusion :",
+        "de": "Fazit:"
+    },
+    "error_performing_test": {
+        "en": "Error performing test:",
+        "es": "Error al realizar la prueba:",
+        "fr": "Erreur lors de l'exécution du test :",
+        "de": "Fehler beim Ausführen des Tests:"
+    },
+    "no_mcnemar_results": {
+        "en": "No McNemar's Test results found. Run 'scripts/plot_results.py' to generate them.",
+        "es": "No se encontraron resultados de la Prueba de McNemar. Ejecuta 'scripts/plot_results.py' para generarlos.",
+        "fr": "Aucun résultat du Test de McNemar trouvé. Exécutez 'scripts/plot_results.py' pour les générer.",
+        "de": "Keine McNemar-Testergebnisse gefunden. Führen Sie 'scripts/plot_results.py' aus, um sie zu generieren."
+    },
+    "other_performance_graphs": {
+        "en": "Other Performance Graphs:",
+        "es": "Otros Gráficos de Rendimiento:",
+        "fr": "Autres Graphiques de Performance :",
+        "de": "Weitere Leistungsdiagramme:"
+    },
+    "accuracy_per_model_subtitle": {
+        "en": "Accuracy per Model",
+        "es": "Precisión por Modelo",
+        "fr": "Précision par Modèle",
+        "de": "Genauigkeit pro Modell"
+    },
+    "accuracy_per_model_desc": {
+        "en": "This graph shows the overall accuracy of each model (ResNet18, ResNet50, DenseNet121) on the validation dataset.",
+        "es": "Este gráfico muestra la precisión general de cada modelo (ResNet18, ResNet50, DenseNet121) en el conjunto de datos de validación.",
+        "fr": "Ce graphique montre la précision globale de chaque modèle (ResNet18, ResNet50, DenseNet121) sur l'ensemble de données de validation.",
+        "de": "Dieses Diagramm zeigt die Gesamtgenauigkeit jedes Modells (ResNet18, ResNet50, DenseNet121) auf dem Validierungsdatensatz."
+    },
+    "performance_comparison_accuracy_subtitle": {
+        "en": "Performance Comparison (Accuracy)",
+        "es": "Comparación de Rendimiento (Precisión)",
+        "fr": "Comparaison des Performances (Précision)",
+        "de": "Leistungsvergleich (Genauigkeit)"
+    },
+    "performance_comparison_accuracy_desc": {
+        "en": "This graph compares the accuracy of the different models, offering a quick overview of which model performed best in terms of correct classification.",
+        "es": "Este gráfico compara la precisión de los diferentes modelos, ofreciendo una visión rápida de cuál modelo tuvo el mejor desempeño en términos de clasificación correcta.",
+        "fr": "Ce graphique compare la précision des différents modèles, offrant un aperçu rapide de quel modèle a obtenu les meilleures performances en termes de classification correcte.",
+        "de": "Dieses Diagramm vergleicht die Genauigkeit der verschiedenen Modelle und bietet einen schnellen Überblick darüber, welches Modell in Bezug auf die korrekte Klassifizierung am besten abgeschnitten hat."
+    },
+    "training_time_comparison_subtitle": {
+        "en": "Training Time Comparison",
+        "es": "Comparación del Tiempo de Entrenamiento",
+        "fr": "Comparaison du Temps d'Entraînement",
+        "de": "Vergleich der Trainingszeit"
+    },
+    "training_time_comparison_desc": {
+        "en": "This graph illustrates the time each model took to train, which is crucial for evaluating the computational efficiency of each architecture.",
+        "es": "Este gráfico ilustra el tiempo que cada modelo tardó en entrenarse, lo cual es crucial para evaluar la eficiencia computacional de cada arquitectura.",
+        "fr": "Ce graphique illustre le temps qu'il a fallu à chaque modèle pour s'entraîner, ce qui est crucial pour évaluer l'efficacité computationnelle de chaque architecture.",
+        "de": "Dieses Diagramm veranschaulicht die Trainingszeit jedes Modells, was entscheidend für die Bewertung der Recheneffizienz jeder Architektur ist."
+    },
+    "error_histogram_subtitle": {
+        "en": "Error Histogram",
+        "es": "Histograma de Errores",
+        "fr": "Histogramme des Erreurs",
+        "de": "Fehlerhistogramm"
+    },
+    "error_histogram_desc": {
+        "en": "This histogram visualizes the distribution of prediction errors, helping to identify if models tend to make errors in certain classes or with a certain magnitude.",
+        "es": "Este histograma visualiza la distribución de los errores de predicción, ayudando a identificar si los modelos tienden a cometer errores en ciertas clases o con cierta magnitud.",
+        "fr": "Cet histogramme visualise la distribution des erreurs de prédiction, aidant à identifier si les modèles ont tendance à faire des erreurs dans certaines classes ou avec une certaine magnitude.",
+        "de": "Dieses Histogramm visualisiert die Verteilung der Vorhersagefehler und hilft dabei, zu identifizieren, ob Modelle dazu neigen, Fehler in bestimmten Klassen oder mit einer bestimmten Größe zu machen."
+    },
+    "prediction_correlation_matrix_subtitle": {
+        "en": "Prediction Correlation Matrix",
+        "es": "Matriz de Correlación de Predicciones",
+        "fr": "Matrice de Corrélation des Prédictions",
+        "de": "Vorhersage-Korrelationsmatrix"
+    },
+    "prediction_correlation_matrix_desc": {
+        "en": "This matrix shows the correlation between the predictions of the different models, indicating how often the models agree or disagree in their classifications.",
+        "es": "Esta matriz muestra la correlación entre las predicciones de los diferentes modelos, indicando qué tan a menudo los modelos están de acuerdo o en desacuerdo en sus clasificaciones.",
+        "fr": "Cette matrice montre la corrélation entre les prédictions des différents modèles, indiquant à quelle fréquence les modèles sont d'accord ou en désaccord dans leurs classifications.",
+        "de": "Diese Matrix zeigt die Korrelation zwischen den Vorhersagen der verschiedenen Modelle und gibt an, wie oft die Modelle in ihren Klassifizierungen übereinstimmen oder nicht übereinstimmen."
+    },
+    "prediction_correlation_matrix_resnet18_densenet121_subtitle": {
+        "en": "Prediction Correlation: ResNet18 vs DenseNet121",
+        "es": "Correlación de Predicciones: ResNet18 vs DenseNet121",
+        "fr": "Corrélation des Prédictions : ResNet18 vs DenseNet121",
+        "de": "Vorhersage-Korrelation: ResNet18 vs DenseNet121"
+    },
+    "prediction_correlation_matrix_resnet18_densenet121_desc": {
+        "en": "This specific matrix details the correlation between the predictions of ResNet18 and DenseNet121, revealing patterns of agreement and disagreement between these two models.",
+        "es": "Esta matriz específica detalla la correlación entre las predicciones de ResNet18 y DenseNet121, revelando patrones de acuerdo y desacuerdo entre estos dos modelos.",
+        "fr": "Cette matrice spécifique détaille la corrélation entre les prédictions de ResNet18 et DenseNet121, révélant des schémas d'accord et de désaccord entre ces deux modèles.",
+        "de": "Diese spezifische Matrix zeigt die Korrelation zwischen den Vorhersagen von ResNet18 und DenseNet121 und enthüllt Muster der Übereinstimmung und Nichtübereinstimmung zwischen diesen beiden Modellen."
+    },
+    "prediction_correlation_matrix_resnet18_resnet50_subtitle": {
+        "en": "Prediction Correlation: ResNet18 vs ResNet50",
+        "es": "Correlación de Predicciones: ResNet18 vs ResNet50",
+        "fr": "Corrélation des Prédictions : ResNet18 vs ResNet50",
+        "de": "Vorhersage-Korrelation: ResNet18 vs ResNet50"
+    },
+    "prediction_correlation_matrix_resnet18_resnet50_desc": {
+        "en": "This specific matrix details the correlation between the predictions of ResNet18 and ResNet50, revealing patterns of agreement and disagreement between these two models.",
+        "es": "Esta matriz específica detalla la correlación entre las predicciones de ResNet18 y ResNet50, revelando patrones de acuerdo y desacuerdo entre estos dos modelos.",
+        "fr": "Cette matrice spécifique détaille la corrélation entre les prédictions de ResNet18 et ResNet50, révélant des schémas d'accord et de désaccord entre ces deux modèles.",
+        "de": "Diese spezifische Matrix zeigt die Korrelation zwischen den Vorhersagen von ResNet18 und ResNet50 und enthüllt Muster der Übereinstimmung und Nichtübereinstimmung zwischen diesen beiden Modellen."
+    },
+    "prediction_correlation_matrix_resnet50_densenet121_subtitle": {
+        "en": "Prediction Correlation: ResNet50 vs DenseNet121",
+        "es": "Correlación de Predicciones: ResNet50 vs DenseNet121",
+        "fr": "Corrélation des Prédictions : ResNet50 vs DenseNet121",
+        "de": "Vorhersage-Korrelation: ResNet50 vs DenseNet121"
+    },
+    "prediction_correlation_matrix_resnet50_densenet121_desc": {
+        "en": "This specific matrix details the correlation between the predictions of ResNet50 and DenseNet121, revealing patterns of agreement and disagreement between these two models.",
+        "es": "Esta matriz específica detalla la correlación entre las predicciones de ResNet50 y DenseNet121, revelando patrones de acuerdo y desacuerdo entre estos dos modelos.",
+        "fr": "Cette matrice spécifique détaille la corrélation entre les prédictions de ResNet50 et DenseNet121, révélant des schémas d'accord et de désaccord entre ces deux modèles.",
+        "de": "Diese spezifische Matrix zeigt die Korrelation zwischen den Vorhersagen von ResNet50 und DenseNet121 und enthüllt Muster der Übereinstimmung und Nichtübereinstimmung zwischen diesen beiden Modellen."
+    },
+    "prediction_header": {
+        "en": "Potato Leaf Disease Prediction 🔍",
+        "es": "Predicción de Enfermedades de la Hoja de Patata 🔍",
+        "fr": "Prédiction des Maladies des Feuilles de Pomme de Terre 🔍",
+        "de": "Kartoffelblattkrankheitsvorhersage 🔍"
+    },
+    "prediction_description": {
+        "en": "Upload an image of a potato leaf for the models to make a prediction.",
+        "es": "Sube una imagen de una hoja de patata para que los modelos realicen una predicción.",
+        "fr": "Téléchargez une image d'une feuille de pomme de terre pour que les modèles fassent une prédiction.",
+        "de": "Laden Sie ein Bild eines Kartoffelblatts hoch, damit die Modelle eine Vorhersage treffen können."
+    },
+    "choose_image": {
+        "en": "Choose an image",
+        "es": "Elige una imagen",
+        "fr": "Choisissez une image",
+        "de": "Wählen Sie ein Bild"
+    },
+    "uploaded_image": {
+        "en": "Uploaded Image",
+        "es": "Imagen Cargada",
+        "fr": "Image Téléchargée",
+        "de": "Hochgeladenes Bild"
+    },
+    "perform_prediction": {
+        "en": "Perform Prediction",
+        "es": "Realizar Predicción",
+        "fr": "Effectuer la Prédiction",
+        "de": "Vorhersage durchführen"
+    },
+    "prediction_results_subheader": {
+        "en": "Prediction Results:",
+        "es": "Resultados de la Predicción:",
+        "fr": "Résultats de la Prédiction :",
+        "de": "Vorhersageergebnisse:"
+    },
+    "detected_disease": {
+        "en": "Detected Disease:",
+        "es": "Enfermedad Detectada:",
+        "fr": "Maladie Détectée :",
+        "de": "Erkannte Krankheit:"
+    },
+    "confidence": {
+        "en": "Confidence:",
+        "es": "Confianza:",
+        "fr": "Confiance :",
+        "de": "Konfidenz:"
+    },
+    "class_probabilities": {
+        "en": "Class Probabilities",
+        "es": "Probabilidades de Clase",
+        "fr": "Probabilités de Classe",
+        "de": "Klassenwahrscheinlichkeiten"
+    },
+    "generate_report_header": {
+        "en": "PDF Report Generation 📄",
+        "es": "Generación de Reporte PDF 📄",
+        "fr": "Génération de Rapport PDF 📄",
+        "de": "PDF-Berichtserstellung 📄"
+    },
+    "generate_report_description": {
+        "en": "Click the button to generate a PDF report with all statistical results and graphs.",
+        "es": "Haz clic en el botón para generar un reporte PDF con todos los resultados estadísticos y gráficos.",
+        "fr": "Cliquez sur le bouton pour générer un rapport PDF avec tous les résultats statistiques et graphiques.",
+        "de": "Klicken Sie auf die Schaltfläche, um einen PDF-Bericht mit allen statistischen Ergebnissen und Diagrammen zu erstellen."
+    },
+    "generate_report_button": {
+        "en": "Generate PDF Report",
+        "es": "Generar Reporte PDF",
+        "fr": "Générer un Rapport PDF",
+        "de": "PDF-Bericht generieren"
+    },
+    "generating_report": {
+        "en": "Generating PDF report... This may take a moment.",
+        "es": "Generando reporte PDF... Esto puede tomar un momento.",
+        "fr": "Génération du rapport PDF... Cela peut prendre un moment.",
+        "de": "PDF-Bericht wird generiert... Dies kann einen Moment dauern."
+    },
+    "report_generated_successfully": {
+        "en": "PDF report generated successfully.",
+        "es": "Reporte PDF generado exitosamente.",
+        "fr": "Rapport PDF généré avec succès.",
+        "de": "PDF-Bericht erfolgreich generiert."
+    },
+    "download_report": {
+        "en": "Download PDF Report",
+        "es": "Descargar Reporte PDF",
+        "fr": "Télécharger le Rapport PDF",
+        "de": "PDF-Bericht herunterladen"
+    },
+    "report_title_pdf": {
+        "en": "Disease Analysis Report",
+        "es": "Reporte de Análisis de Enfermedades",
+        "fr": "Rapport d'Analyse des Maladies",
+        "de": "Krankheitsanalysebericht"
+    },
+    "report_subtitle_pdf": {
+        "en": "Statistical Analysis and Visualization of Deep Learning Models",
+        "es": "Análisis Estadístico y Visualización de Modelos de Aprendizaje Profundo",
+        "fr": "Analyse Statistique et Visualisation des Modèles d'Apprentissage Profond",
+        "de": "Statistische Analyse und Visualisierung von Deep-Learning-Modellen"
+    },
+    "generation_date_pdf": {
+        "en": "Generation Date:",
+        "es": "Fecha de Generación:",
+        "fr": "Date de Génération :",
+        "de": "Generierungsdatum:"
+    },
+    "statistical_analysis_section": {
+        "en": "1. Statistical Analysis of Models",
+        "es": "1. Análisis Estadístico de Modelos",
+        "fr": "1. Analyse Statistique des Modèles",
+        "de": "1. Statistische Analyse von Modellen"
+    },
+    "confusion_reports_mcc_section": {
+        "en": "1.1. Confusion Matrices, Classification Reports, and MCC",
+        "es": "1.1. Matrices de Confusión, Informes de Clasificación y MCC",
+        "fr": "1.1. Matrices de Confusion, Rapports de Classification et MCC",
+        "de": "1.1. Konfusionsmatrizen, Klassifizierungsberichte und MCC"
+    },
+    "results_for": {
+        "en": "Results for",
+        "es": "Resultados para",
+        "fr": "Résultats pour",
+        "de": "Ergebnisse für"
+    },
+    "confusion_matrix_caption": {
+        "en": "Confusion Matrix for",
+        "es": "Matriz de Confusión para",
+        "fr": "Matrice de Confusion pour",
+        "de": "Konfusionsmatrix für"
+    },
+    "classification_report_caption": {
+        "en": "Classification Report for",
+        "es": "Informe de Clasificación para",
+        "fr": "Rapport de Classification pour",
+        "de": "Klassifizierungsbericht für"
+    },
+    "mcc_caption": {
+        "en": "Matthews Correlation Coefficient (MCC) for",
+        "es": "Coeficiente de Matthews (MCC) para",
+        "fr": "Coefficient de Corrélation de Matthews (MCC) pour",
+        "de": "Matthews Korrelationskoeffizient (MCC) für"
+    },
+    "mcnemar_test_section": {
+        "en": "1.2. McNemar's Test for Model Comparison",
+        "es": "1.2. Prueba de McNemar para Comparación de Modelos",
+        "fr": "1.2. Test de McNemar pour la Comparaison de Modèles",
+        "de": "1.2. McNemar-Test für den Modellvergleich"
+    },
+    "model1": {
+        "en": "Model 1",
+        "es": "Modelo 1",
+        "fr": "Modèle 1",
+        "de": "Modell 1"
+    },
+    "model2": {
+        "en": "Model 2",
+        "es": "Modelo 2",
+        "fr": "Modèle 2",
+        "de": "Modell 2"
+    },
+    "chi_squared_statistic_table": {
+        "en": "Chi-squared Statistic",
+        "es": "Estadístico Chi-cuadrado",
+        "fr": "Statistique du Chi-carré",
+        "de": "Chi-Quadrat-Statistik"
+    },
+    "p_value_table": {
+        "en": "p-value",
+        "es": "Valor p",
+        "fr": "Valeur p",
+        "de": "p-Wert"
+    },
+    "conclusions_mcnemar": {
+        "en": "Conclusions from McNemar's Test:",
+        "es": "Conclusiones de la Prueba de McNemar:",
+        "fr": "Conclusions du Test de McNemar :",
+        "de": "Schlussfolgerungen aus dem McNemar-Test:"
+    },
+    "no_mcnemar_results_pdf": {
+        "en": "No McNemar's Test results found. Run 'scripts/plot_results.py' to generate them.",
+        "es": "No se encontraron resultados de la Prueba de McNemar. Ejecuta 'scripts/plot_results.py' para generarlos.",
+        "fr": "Aucun resultado del Test de McNemar encontrado. Exécutez 'scripts/plot_results.py' para les générer.",
+        "de": "Keine McNemar-Testergebnisse gefunden. Führen Sie 'scripts/plot_results.py' aus, um sie zu generieren."
+    },
+    "performance_plots_section": {
+        "en": "2. Performance Plots",
+        "es": "2. Gráficos de Rendimiento",
+        "fr": "2. Graphiques de Performance",
+        "de": "2. Leistungsdiagramme"
+    },
+    "description_not_available": {
+        "en": "Description not available.",
+        "es": "Descripción no disponible.",
+        "fr": "Description non disponible.",
+        "de": "Beschreibung nicht verfügbar."
+    },
+    "disease_info_header": {
+        "en": "Potato Leaf Disease Information 🌿",
+        "es": "Información de Enfermedades de la Hoja de Patata 🌿",
+        "fr": "Informations sur les Maladies des Feuilles de Pomme de Terre 🌿",
+        "de": "Informationen zu Kartoffelblattkrankheiten 🌿"
+    },
+    "disease_info_intro": {
+        "en": "Here you can find detailed information about the different potato leaf diseases that our models can detect, along with their symptoms and characteristics.",
+        "es": "Aquí puedes encontrar información detallada sobre las diferentes enfermedades de la hoja de patata que nuestros modelos pueden detectar, junto con sus síntomas y características.",
+        "fr": "Ici, vous trouverez des informations détaillées sur les différentes maladies des feuilles de pomme de terre que nos modèles peuvent détecter, ainsi que leurs symptômes et caractéristiques.",
+        "de": "Hier finden Sie detaillierte Informationen zu den verschiedenen Kartoffelblattkrankheiten, die unsere Modelle erkennen können, zusammen mit ihren Symptomen und Merkmalen."
+    },
+    "bacteria_name": {
+        "en": "Bacteria",
+        "es": "Bacteria",
+        "fr": "Bactéries",
+        "de": "Bakterien"
+    },
+    "bacteria_desc": {
+        "en": "Bacterial diseases often cause water-soaked lesions, wilting, and soft rot. They can spread rapidly in warm, humid conditions.",
+        "es": "Las enfermedades bacterianas a menudo causan lesiones empapadas de agua, marchitamiento y pudrición blanda. Pueden propagarse rápidamente en condiciones cálidas y húmedas.",
+        "fr": "Les maladies bactériennes provoquent souvent des lésions gorgées d'eau, le flétrissement et la pourriture molle. Elles peuvent se propager rapidement dans des conditions chaudes et humides.",
+        "de": "Bakterielle Krankheiten verursachen oft wassergetränkte Läsionen, Welke und Weichfäule. Sie können sich bei warmen, feuchten Bedingungen schnell ausbreiten."
+    },
+    "fungi_name": {
+        "en": "Fungi",
+        "es": "Hongos",
+        "fr": "Champignons",
+        "de": "Pilze"
+    },
+    "fungi_desc": {
+        "en": "Fungal diseases typically appear as spots, mold, or powdery growth on leaves. They thrive in moist environments and can severely impact yield.",
+        "es": "Las enfermedades fúngicas suelen aparecer como manchas, moho o crecimiento polvoriento en las hojas. Prosperan en ambientes húmedos y pueden afectar gravemente el rendimiento.",
+        "fr": "Les maladies fongiques apparaissent généralement sous forme de taches, de moisissures ou de croissance poudreuse sur les feuilles. Elles prospèrent dans les environnements humides y pueden gravemente afectar el rendimiento.",
+        "de": "Pilzkrankheiten treten typischerweise als Flecken, Schimmel oder pulverförmiges Wachstum auf den Blättern auf. Sie gedeihen in feuchten Umgebungen und können den Ertrag stark beeinträchtigen."
+    },
+    "healthy_name": {
+        "en": "Healthy",
+        "es": "Sana",
+        "fr": "Sain",
+        "de": "Gesund"
+    },
+    "healthy_desc": {
+        "en": "Healthy potato leaves are vibrant green, firm, and show no signs of discoloration, spots, or deformities. They indicate a thriving plant.",
+        "es": "Las hojas de patata sanas son de color verde vibrante, firmes y no muestran signos de decoloración, manchas o deformidades. Indican una planta próspera.",
+        "fr": "Les feuilles de pomme de terre saines sont d'un vert éclatant, fermes et ne présentent aucun signe de décoloration, de taches ou de déformations. Elles indiquent une plante florissante.",
+        "de": "Gesunde Kartoffelblätter sind leuchtend grün, fest und zeigen keine Anzeichen von Verfärbungen, Flecken oder Deformationen. Sie weisen auf eine gedeihende Pflanze hin."
+    },
+    "nematode_name": {
+        "en": "Nematode",
+        "es": "Nematodo",
+        "fr": "Nématodes",
+        "de": "Nematoden"
+    },
+    "nematode_desc": {
+        "en": "Nematode damage can cause stunted growth, yellowing, and wilting, often mimicking nutrient deficiencies. They attack roots, affecting water and nutrient uptake.",
+        "es": "El daño por nematodos puede causar un crecimiento atrofiado, amarillamiento y marchitamiento, a menudo imitando deficiencias de nutrientes. Atacan las raíces, afectando la absorción de agua y nutrientes.",
+        "fr": "Les dommages causés par les nématodes peuvent entraîner un retard de croissance, un jaunissement et un flétrissement, imitant souvent les carencias nutritionnelles. Ils attaquent les racines, affectant l'absorption de l'eau et des nutriments.",
+        "de": "Nematodenschäden können zu Wachstumsstörungen, Vergilbung und Welke führen, oft Nährstoffmangel imitierend. Sie greifen die Wurzeln an und beeinträchtigen die Wasser- und Nährstoffaufnahme."
+    },
+    "pest_name": {
+        "en": "Pest",
+        "es": "Plaga",
+        "fr": "Ravageur",
+        "de": "Schädling"
+    },
+    "pest_desc": {
+        "en": "Pest infestations lead to visible damage like chewed leaves, holes, or presence of insects. Common potato pests include aphids, leafhoppers, and potato beetles.",
+        "es": "Las infestaciones de plagas provocan daños visibles como hojas masticadas, agujeros o presencia de insectos. Las plagas comunes de la patata incluyen pulgones, cicadélidos y escarabajos de la patata.",
+        "fr": "Les infestations de ravageurs entraînent des dommages visibles tels que des feuilles mâchées, des trous ou la présence d'insectes. Les ravageurs courants de la pomme de terre comprennent les pucerons, les cicadelles et les doryphores.",
+        "de": "Schädlingsbefall führt zu sichtbaren Schäden wie angefressenen Blättern, Löchern oder dem Vorhandensein von Insekten. Häufige Kartoffelschädlinge sind Blattläuse, Zikaden und Kartoffelkäfer."
+    },
+    "phytophthora_name": {
+        "en": "Phytophthora",
+        "es": "Phytophthora",
+        "fr": "Phytophthora",
+        "de": "Phytophthora"
+    },
+    "phytophthora_desc": {
+        "en": "Phytophthora infestans causes late blight, characterized by dark, water-soaked lesions on leaves that rapidly expand, often with a fuzzy white mold on the underside.",
+        "es": "Phytophthora infestans causa el tizón tardío, caracterizado por lesiones oscuras y empapadas de agua en las hojas que se expanden rápidamente, a menudo con un moho blanco y algodonoso en el envés.",
+        "fr": "Phytophthora infestans provoque le mildiou, caractérisé par des lésions sombres et gorgées d'eau sur les feuilles qui s'étendent rapidement, souvent avec une moisissure blanche et duveteuse sur la face inférieure.",
+        "de": "Phytophthora infestans verursacht die Kraut- und Knollenfäule, gekennzeichnet durch dunkle, wassergetränkte Läsionen auf den Blättern, die sich schnell ausbreiten, oft mit einem flaumigen weißen Schimmel auf der Unterseite."
+    },
+    "virus_name": {
+        "en": "Virus",
+        "es": "Virus",
+        "fr": "Virus",
+        "de": "Virus"
+    },
+    "virus_desc": {
+        "en": "Viral diseases often result in mosaic patterns, curling, or stunted growth. They are typically spread by insect vectors and can significantly reduce plant vigor.",
+        "es": "Las enfermedades virales a menudo resultan en patrones de mosaico, rizado o crecimiento atrofiado. Típicamente se propagan por vectores de insectos y pueden reducir significativamente el vigor de la planta.",
+        "fr": "Les maladies virales entraînent souvent des motifs en mosaïque, un enroulement ou un retard de croissance. Elles sont généralement propagadas por des vecteurs d'insectes et pueden reducir considerablemente la vigueur de la planta.",
+        "de": "Virale Krankheiten führen oft zu Mosaikmustern, Kräuselungen oder Wachstumsstörungen. Sie werden typischerweise durch Insektenvektoren verbreitet und können die Pflanzenvitalität erheblich reduzieren."
+    },
+    "recommendations_header": {
+        "en": "Recommendations for Disease Management 💡",
+        "es": "Recomendaciones para el Manejo de Enfermedades 💡",
+        "fr": "Recommandations pour la Gestion des Maladies 💡",
+        "de": "Empfehlungen zur Krankheitsbekämpfung 💡"
+    },
+    "recommendations_intro": {
+        "en": "Based on the detected disease, here are some general recommendations for management and prevention. Always consult with a local agricultural expert for specific advice tailored to your region and conditions.",
+        "es": "Basado en la enfermedad detectada, aquí hay algunas recomendaciones generales para el manejo y la prevención. Siempre consulta con un experto agrícola local para obtener asesoramiento específico adaptado a tu región y condiciones.",
+        "fr": "Basé sur la maladie détectée, voici quelques recommandations générales pour la gestion et la prévention. Consultez toujours un expert agricole local pour des conseils spécifiques adaptés à votre région et à vos conditions.",
+        "de": "Basierend auf der erkannten Krankheit finden Sie hier einige allgemeine Empfehlungen zur Bekämpfung und Prävention. Konsultieren Sie immer einen lokalen Landwirtschaftsexperten für spezifische Ratschläge, die auf Ihre Region und Bedingungen zugeschnitten sind."
+    },
+    "general_recommendations": {
+        "en": "General Recommendations:",
+        "es": "Recomendaciones Generales:",
+        "fr": "Recommandations Générales :",
+        "de": "Allgemeine Empfehlungen:"
+    },
+    "general_recommendation_1": {
+        "en": "Crop Rotation: Rotate potato crops with non-host plants to break disease cycles.",
+        "es": "Rotación de Cultivos: Rota los cultivos de patata con plantas no hospedadoras para romper los ciclos de enfermedades.",
+        "fr": "Rotation des cultures : Alternez les cultures de pommes de terre avec des plantes non hôtes pour briser les cycles de maladies.",
+        "de": "Fruchtwechsel: Wechseln Sie Kartoffelpflanzen mit Nicht-Wirtspflanzen ab, um Krankheitszyklen zu unterbrechen."
+    },
+    "general_recommendation_2": {
+        "en": "Sanitation: Remove and destroy infected plant debris to reduce inoculum sources.",
+        "es": "Saneamiento: Elimina y destruye los restos de plantas infectadas para reducir las fuentes de inóculo.",
+        "fr": "Assainissement : Éliminez et détruisez les débris végétaux infectés pour réduire les sources d'inoculum.",
+        "de": "Sanierung: Entfernen und zerstören Sie infizierte Pflanzenreste, um Inokulumquellen zu reduzieren."
+    },
+    "general_recommendation_3": {
+        "en": "Resistant Varieties: Plant potato varieties known to be resistant to common diseases in your area.",
+        "es": "Variedades Resistentes: Planta variedades de patata conocidas por ser resistentes a enfermedades comunes en tu área.",
+        "fr": "Variétés résistantes : Plantez des variétés de pommes de terre connues pour être résistantes aux maladies courantes dans votre région.",
+        "de": "Resistente Sorten: Pflanzen Sie Kartoffelsorten, die bekanntermaßen resistent gegen häufige Krankheiten in Ihrer Region sind."
+    },
+    "general_recommendation_4": {
+        "en": "Proper Irrigation: Avoid overhead irrigation that keeps leaves wet for prolonged periods, which favors fungal and bacterial growth.",
+        "es": "Riego Adecuado: Evita el riego por aspersión que mantiene las hojas mojadas durante períodos prolongados, lo que favorece el crecimiento de hongos y bacterias.",
+        "fr": "Irrigation adéquate : Évitez l'irrigation par aspersion qui maintient les feuilles humides pendant de longues périodes, ce qui favorise la croissance fongique et bactérienne.",
+        "de": "Richtige Bewässerung: Vermeiden Sie Überkopfbewässerung, die Blätter über längere Zeit feucht hält, was das Wachstum von Pilzen und Bakterien begünstigt."
+    },
+    "general_recommendation_5": {
+        "en": "Nutrient Management: Ensure balanced fertilization to promote strong plant health and resilience.",
+        "es": "Manejo de Nutrientes: Asegura una fertilización equilibrada para promover una fuerte salud y resistencia de la planta.",
+        "fr": "Gestion des nutriments : Assurez une fertilisation équilibrée pour favoriser une forte santé et résilience des plantes.",
+        "de": "Nährstoffmanagement: Sorgen Sie für eine ausgewogene Düngung, um eine starke Pflanzengesundheit und Widerstandsfähigkeit zu fördern."
+    },
+    "specific_recommendations": {
+        "en": "Specific Recommendations for",
+        "es": "Recomendaciones Específicas para",
+        "fr": "Recommandations Spécifiques pour",
+        "de": "Spezifische Empfehlungen für"
+    },
+    "bacteria_reco": {
+        "en": "Use copper-based bactericides. Improve drainage and avoid working in wet fields to prevent spread.",
+        "es": "Usa bactericidas a base de cobre. Mejora el drenaje y evita trabajar en campos húmedos para prevenir la propagación.",
+        "fr": "Utilisez des bactéricides à base de cuivre. Améliorez le drainage et évitez de travailler dans des champs humides pour prévenir la propagation.",
+        "de": "Verwenden Sie kupferbasierte Bakterizide. Verbessern Sie die Drainage und vermeiden Sie das Arbeiten auf nassen Feldern, um die Ausbreitung zu verhindern."
+    },
+    "fungi_reco": {
+        "en": "Apply fungicides as per label instructions. Ensure good air circulation around plants.",
+        "es": "Aplica fungicidas según las instrucciones de la etiqueta. Asegura una buena circulación de aire alrededor de las plantas.",
+        "fr": "Appliquez des fongicidas selon les instructions de l'étiquette. Assurez une bonne circulation de l'air autour des plantes.",
+        "de": "Wenden Sie Fungizide gemäß den Anweisungen auf dem Etikett an. Sorgen Sie für eine gute Luftzirkulation um die Pflanzen."
+    },
+    "nematode_reco": {
+        "en": "Consider soil solarization or nematicides. Plant cover crops that suppress nematodes.",
+        "es": "Considera la solarización del suelo o nematicidas. Planta cultivos de cobertura que supriman los nematodos.",
+        "fr": "Envisagez la solarisation du sol ou des nématicides. Plantez des cultures de couverture qui suppriment les nématodes.",
+        "de": "Erwägen Sie Bodensolarisation oder Nematizide. Pflanzen Sie Zwischenfrüchte, die Nematoden unterdrücken."
+    },
+    "pest_reco": {
+        "en": "Implement integrated pest management (IPM) strategies, including biological controls and appropriate insecticides.",
+        "es": "Implementa estrategias de manejo integrado de plagas (MIP), incluyendo controles biológicos e insecticidas apropiados.",
+        "fr": "Mettez en œuvre des stratégies de lutte intégrée contre les ravageurs (IPM), y compris des contrôles biologiques et des insecticides appropriés.",
+        "de": "Implementieren Sie integrierte Schädlingsbekämpfungsstrategien (IPM), einschließlich biologischer Kontrollen und geeigneter Insektizide."
+    },
+    "phytophthora_reco": {
+        "en": "Apply fungicides specifically for late blight. Improve air circulation and avoid overhead irrigation. Remove and destroy infected plants and debris promptly.",
+        "es": "Aplica fungicidas específicos para el tizón tardío. Mejora la circulación del aire y evita el riego por aspersión. Elimina y destruye las plantas y restos infectados rápidamente.",
+        "fr": "Appliquez des fongicidas spécifiquement pour le mildiou. Améliorez la circulation de l'air et évitez l'irrigation par aspersion. Retirez et détruisez rapidement les plantes et les débris infectés.",
+        "de": "Wenden Sie Fungizide speziell gegen Kraut- und Knollenfäule an. Verbessern Sie die Luftzirkulation und vermeiden Sie Überkopfbewässerung. Entfernen und vernichten Sie infizierte Pflanzen und Pflanzenreste umgehend."
+    },
+    "virus_reco": {
+        "en": "Control insect vectors (e.g., aphids) that spread viruses. Remove and destroy infected plants immediately.",
+        "es": "Controla los insectos vectores (ej. pulgones) que propagan virus. Elimina y destruye las plantas infectadas inmediatamente.",
+        "fr": "Contrôlez les insectes vecteurs (par exemple, les pucerons) qui propagent les virus. Éliminez et détruisez immédiatement les plantes infectées.",
+        "de": "Kontrollieren Sie Insektenvektoren (z. B. Blattläuse), que Viren verbreiten. Entfernen und zerstören Sie infizierte Pflanzen sofort."
+    },
+    "healthy_reco": {
+        "en": "Maintain good agricultural practices, including proper fertilization, irrigation, and pest control, to ensure continued plant health.",
+        "es": "Mantén buenas prácticas agrícolas, incluyendo fertilización adecuada, riego y control de plagas, para asegurar la salud continua de la planta.",
+        "fr": "Maintenez de bonnes pratiques agricoles, y compris une fertilisation, une irrigation et un contrôle des ravageurs appropriés, pour assurer la santé continue des plantes.",
+        "de": "Pflegen Sie gute landwirtschaftliche Praktiken, einschließlich ordnungsgemäßer Düngung, Bewässerung und Schädlingsbekämpfung, um die anhaltende Pflanzengesundheit zu gewährleisten."
+    },
+    "no_specific_reco": {
+        "en": "No specific recommendations available for this class.",
+        "es": "No hay recomendaciones específicas disponibles para esta clase.",
+        "fr": "Aucune recommandation spécifique disponible pour cette classe.",
+        "de": "Keine spezifischen Empfehlungen für diese Klasse verfügbar."
+    },
+    "prediction_history_header": {
+        "en": "Prediction History 📜",
+        "es": "Historial de Predicciones 📜",
+        "fr": "Historique des Prédictions 📜",
+        "de": "Vorhersageverlauf 📜"
+    },
+    "no_predictions_yet": {
+        "en": "No predictions yet. Upload an image to start!",
+        "es": "Aún no hay predicciones. ¡Sube una imagen para empezar!",
+        "fr": "Aucune prédiction pour l'instant. Téléchargez une image pour commencer !",
+        "de": "Noch keine Vorhersagen. Laden Sie ein Bild hoch, um zu beginnen!"
+    },
+    "clear_history": {
+        "en": "Clear History",
+        "es": "Borrar Historial",
+        "fr": "Effacer l'Historique",
+        "de": "Verlauf löschen"
+    },
+    "download_current_prediction": {
+        "en": "Download Current Prediction",
+        "es": "Descargar Predicción Actual",
+        "fr": "Télécharger la Prédiction Actuelle",
+        "de": "Aktuelle Vorhersage herunterladen"
+    },
+    "specific_recommendations_title": {
+        "en": "Specific Recommendations",
+        "es": "Recomendaciones Específicas",
+        "fr": "Recommandations Spécifiques",
+        "de": "Spezifische Empfehlungen"
+    },
+    "training_validation_plot_desc": {
+        "en": "This plot shows the training and validation accuracy and loss curves for the model, indicating its learning progress and potential overfitting.",
+        "es": "Este gráfico muestra las curvas de precisión y pérdida de entrenamiento y validación para el modelo, indicando su progreso de aprendizaje y posible sobreajuste.",
+        "fr": "Ce graphique montre les courbes de précision et de perte d'entraînement et de validation pour le modèle, indiquant sa progression d'apprentissage et son surapprentissage potentiel.",
+        "de": "Dieses Diagramm zeigt die Trainings- und Validierungsgenauigkeits- und Verlustkurven für das Modell, die den Lernfortschritt und das potenzielle Overfitting anzeigen."
+    },
+    "page_text": {
+        "en": "Page",
+        "es": "Página",
+        "fr": "Page",
+        "de": "Seite"
+    },
+    "probability": {
+        "en": "Probability",
+        "es": "Probabilidad",
+        "fr": "Probabilité",
+        "de": "Wahrscheinlichkeit"
+    },
+    "app_title_suffix_pdf": {
+        "en": "of Potato Leaf",
+        "es": "de la Hoja de Patata",
+        "fr": "de la Feuille de Pomme de Terre",
+        "de": "des Kartoffelblattes"
+    },
+    "last_prediction_pdf": {
+        "en": "1. Last Model Prediction",
+        "es": "1. Última Predicción del Modelo",
+        "fr": "1. Dernière Prédiction du Modèle",
+        "de": "1. Letzte Modellvorhersage"
+    },
+    "model_used_pdf": {
+        "en": "Model Used:",
+        "es": "Modelo Utilizado:",
+        "fr": "Modèle Utilisé :",
+        "de": "Verwendetes Modell:"
+    },
+    "detected_disease_pdf": {
+        "en": "Detected Disease:",
+        "es": "Enfermedad Detectada:",
+        "fr": "Maladie Détectée :",
+        "de": "Erkannte Krankheit:"
+    },
+    "confidence_pdf": {
+        "en": "Confidence:",
+        "es": "Confianza:",
+        "fr": "Confiance :",
+        "de": "Konfidenz:"
+    },
+    "class_pdf": {
+        "en": "Class",
+        "es": "Clase",
+        "fr": "Classe",
+        "de": "Klasse"
+    },
+    "probability_pdf": {
+        "en": "Probability",
+        "es": "Probabilidad",
+        "fr": "Probabilité",
+        "de": "Wahrscheinlichkeit"
+    },
+    "specific_recommendation_for_pdf": {
+        "en": "Specific Recommendation for",
+        "es": "Recomendación Específica para",
+        "fr": "Recommandation Spécifique pour",
+        "de": "Spezifische Empfehlung für"
+    },
+    "class_names_map": {
+        "en": {
+            "Bacteria": "Bacteria",
+            "Fungi": "Fungi",
+            "Healthy": "Healthy",
+            "Nematode": "Nematode",
+            "Pest": "Pest",
+            "Phytophthora": "Phytophthora",
+            "Phytopthora": "Phytophthora",
+            "Virus": "Virus"
+        },
+        "es": {
+            "Bacteria": "Bacteria",
+            "Fungi": "Hongos",
+            "Healthy": "Sana",
+            "Nematode": "Nematodo",
+            "Pest": "Plaga",
+            "Phytophthora": "Phytophthora",
+            "Phytopthora": "Phytophthora",
+            "Virus": "Virus"
+        },
+        "fr": {
+            "Bacteria": "Bactéries",
+            "Fungi": "Champignons",
+            "Healthy": "Sain",
+            "Nematode": "Nématodes",
+            "Pest": "Ravageur",
+            "Phytophthora": "Phytophthora",
+            "Phytopthora": "Phytophthora",
+            "Virus": "Virus"
+        },
+        "de": {
+            "Bacteria": "Bakterien",
+            "Fungi": "Pilze",
+            "Healthy": "Gesund",
+            "Nematode": "Nematoden",
+            "Pest": "Schädling",
+            "Phytophthora": "Phytophthora",
+            "Phytopthora": "Phytophthora",
+            "Virus": "Virus"
+        }
+    },
+    "prediction_type_correct": {
+        "en": "Correct",
+        "es": "Correctas",
+        "fr": "Correctes",
+        "de": "Korrekt"
+    },
+    "prediction_type_incorrect": {
+        "en": "Incorrect",
+        "es": "Incorrectas",
+        "fr": "Incorrectes",
+        "de": "Inkorrekt"
+    },
+    "prediction_type": {
+        "en": "Prediction Type",
+        "es": "Tipo de Predicción",
+        "fr": "Type de Prédiction",
+        "de": "Vorhersagetyp"
+    },
+    "num_predictions": {
+        "en": "Number of Predictions",
+        "es": "Número de Predicciones",
+        "fr": "Nombre de Prédictions",
+        "de": "Anzahl der Vorhersagen"
+    },
+    "accuracy": {
+        "en": "Accuracy",
+        "es": "Precisión",
+        "fr": "Précision",
+        "de": "Genauigkeit"
+    },
+    "epochs": {
+        "en": "Epochs",
+        "es": "Épocas",
+        "fr": "Époques",
+        "de": "Epochen"
+    },
+    "loss": {
+        "en": "Loss",
+        "es": "Pérdida",
+        "fr": "Perte",
+        "de": "Verlust"
+    },
+    "train_loss": {
+        "en": "Train Loss",
+        "es": "Pérdida de Entrenamiento",
+        "fr": "Perte d'Entraînement",
+        "de": "Trainingsverlust"
+    },
+    "val_loss": {
+        "en": "Validation Loss",
+        "es": "Pérdida de Validación",
+        "fr": "Perte de Validation",
+        "de": "Validierungsverlust"
+    },
+    "val_accuracy": {
+        "en": "Validation Accuracy",
+        "es": "Precisión de Validación",
+        "fr": "Précision de Validation",
+        "de": "Validierungsgenauigkeit"
+    },
+    "training_val_loss_for": {
+        "en": "Training and Validation Loss for",
+        "es": "Pérdida de Entrenamiento y Validación para",
+        "fr": "Perte d'Entraînement et de Validation pour",
+        "de": "Trainings- und Validierungsverlust für"
+    },
+    "val_accuracy_for": {
+        "en": "Validation Accuracy for",
+        "es": "Precisión de Validación para",
+        "fr": "Précisión de Validación pour",
+        "de": "Validierungsgenauigkeit für"
+    },
+    "model_performance_comparison": {
+        "en": "Model Performance Comparison (Validation Accuracy)",
+        "es": "Comparación de Rendimiento del Modelo (Precisión de Validación)",
+        "fr": "Comparaison des Performances du Modèle (Précision de Validation)",
+        "de": "Modellleistungsvergleich (Validierungsgenauigkeit)"
+    },
+    "accuracy_per_model": {
+        "en": "Accuracy per Model",
+        "es": "Precisión por Modelo",
+        "fr": "Précision par Modèle",
+        "de": "Genauigkeit pro Modell"
+    },
+    "training_time_seconds": {
+        "en": "Training Time (seconds)",
+        "es": "Tiempo de Entrenamiento (segundos)",
+        "fr": "Temps d'Entraînement (secondes)",
+        "de": "Trainingszeit (Sekunden)"
+    },
+    "training_time_per_model": {
+        "en": "Training Time per Model",
+        "es": "Tiempo de Entrenamiento por Modelo",
+        "fr": "Temps d'Entraînement par Modèle",
+        "de": "Trainingszeit pro Modell"
+    },
+    "prediction_correlation_matrix_between": {
+        "en": "Prediction Correlation Matrix between Models",
+        "es": "Matriz de Correlación de Predicciones entre Modelos",
+        "fr": "Matrice de Corrélation des Prédictions entre Modèles",
+        "de": "Vorhersage-Korrelationsmatrix zwischen Modellen"
+    },
+    "predictions_of": {
+        "en": "Predictions of",
+        "es": "Predicciones de",
+        "fr": "Prédictions de",
+        "de": "Vorhersagen von"
+    },
+    "mcnemar_test_results": {
+        "en": "McNemar's Test Results",
+        "es": "Resultados de la Prueba de McNemar",
+        "fr": "Résultats du Test de McNemar",
+        "de": "McNemar-Testergebnisse"
+    },
+    "chi_squared_statistic_plot": {
+        "en": "Chi-squared Statistic",
+        "es": "Estadístico Chi-cuadrado",
+        "fr": "Statistique du Chi-carré",
+        "de": "Chi-Quadrat-Statistik"
+    },
+    "p_value_plot": {
+        "en": "p-value",
+        "es": "Valor p",
+        "fr": "Valeur p",
+        "de": "p-Wert"
+    },
+    "conclusion_plot": {
+        "en": "Conclusion",
+        "es": "Conclusión",
+        "fr": "Conclusion",
+        "de": "Fazit"
+    },
+    "significant_difference": {
+        "en": "There is a significant difference between",
+        "es": "Hay una diferencia significativa entre",
+        "fr": "Il y a une différence significative entre",
+        "de": "Es gibt einen signifikanten Unterschied zwischen"
+    },
+    "no_significant_difference": {
+        "en": "There is no significant difference between",
+        "es": "No hay una diferencia significativa entre",
+        "fr": "Il n'y a pas de différence significative entre",
+        "de": "Es gibt keinen signifikanten Unterschied zwischen"
+    },
+    "error_performing_mcnemar": {
+        "en": "Could not perform McNemar's test:",
+        "es": "No se pudo realizar la prueba de McNemar:",
+        "fr": "Impossible d'effectuer le test de McNemar :",
+        "de": "McNemar-Test konnte nicht durchgeführt werden:"
+    },
+    "roc_curve_title": {
+        "en": "Receiver Operating Characteristic (ROC) Curve for",
+        "es": "Curva Característica Operativa del Receptor (ROC) para",
+        "fr": "Courbe Caractéristique de Fonctionnement du Récepteur (ROC) pour",
+        "de": "Receiver Operating Characteristic (ROC) Kurve für"
+    },
+    "false_positive_rate": {
+        "en": "False Positive Rate",
+        "es": "Tasa de Falsos Positivos",
+        "fr": "Taux de Faux Positifs",
+        "de": "Falsch-Positiv-Rate"
+    },
+    "true_positive_rate": {
+        "en": "True Positive Rate",
+        "es": "Tasa de Verdaderos Positivos",
+        "fr": "Taux de Vrais Positifs",
+        "de": "Wahre-Positiv-Rate"
+    },
+    "auc_score": {
+        "en": "AUC Score",
+        "es": "Puntuación AUC",
+        "fr": "Score AUC",
+        "de": "AUC-Wert"
+    },
+    "prediction_label": {
+        "en": "Prediction",
+        "es": "Predicción",
+        "fr": "Prédiction",
+        "de": "Vorhersage"
+    },
+    "true_label": {
+        "en": "True Label",
+        "es": "Etiqueta Verdadera",
+        "fr": "Vraie Étiquette",
+        "de": "Wahre Bezeichnung"
+    },
+    "model_features_section": {
+        "en": "3. Model Features",
+        "es": "3. Características de los Modelos",
+        "fr": "3. Caractéristiques des Modèles",
+        "de": "3. Modellmerkmale"
+    },
+    "model_comparison_section": {
+        "en": "5. Model Comparison",
+        "es": "5. Comparación de Modelos",
+        "fr": "5. Comparaison des Modèles",
+        "de": "5. Modellvergleich"
+    },
+    "statistical_analysis_plots_section": {
+        "en": "6. Statistical Analysis and Performance Plots",
+        "es": "6. Análisis Estadístico y Gráficos de Rendimiento",
+        "fr": "6. Analyse Statistique et Graphiques de Performance",
+        "de": "6. Statistische Analyse und Leistungsdiagramme"
+    },
+    "best_model_intro": {
+        "en": "Based on the performance analysis, the model",
+        "es": "Según el análisis de rendimiento, el modelo",
+        "fr": "Selon l'analyse de performance, le modèle",
+        "de": "Basierend auf der Leistungsanalyse ist das Modell"
+    },
+    "best_model_middle": {
+        "en": "is the most recommended for potato leaf disease detection.",
+        "es": "es el más recomendado para la detección de enfermedades en hojas de patata.",
+        "fr": "est le plus recommandé pour la détection des maladies des feuilles de pomme de terre.",
+        "de": "am besten für die Erkennung von Kartoffelblattkrankheiten geeignet."
+    },
+    "accuracy_achieved": {
+        "en": "It achieved a validation accuracy of",
+        "es": "Alcanzó una precisión de validación de",
+        "fr": "Il a atteint une précision de validation de",
+        "de": "Es erreichte eine Validierungsgenauigkeit von"
+    },
+    "training_time_was": {
+        "en": "Additionally, its training time was",
+        "es": "Además, su tiempo de entrenamiento fue de",
+        "fr": "De plus, son temps d'entraînement était de",
+        "de": "Zusätzlich betrug seine Trainingszeit"
+    },
+    "seconds": {
+        "en": "seconds",
+        "es": "segundos",
+        "fr": "secondes",
+        "de": "Sekunden"
+    },
+    "making_it_efficient": {
+        "en": "making it efficient.",
+        "es": "lo que lo hace eficiente.",
+        "fr": "ce qui le rend efficace.",
+        "de": "was es effizient macht."
+    },
+    "mcnemar_test_note": {
+        "en": "It is important to note that McNemar's Test showed no statistically significant differences between the models, suggesting that all have comparable performance on this dataset. However, the selected model offers an optimal balance between accuracy and computational efficiency.",
+        "es": "Es importante destacar que la Prueba de McNemar no mostró diferencias estadísticamente significativas entre los modelos, lo que sugiere que todos tienen un rendimiento comparable en este conjunto de datos. Sin embargo, el modelo seleccionado ofrece un equilibrio óptimo entre precisión y eficiencia computacional.",
+        "fr": "Il est important de noter que le test de McNemar n'a montré aucune différence statistiquement significative entre les modèles, suggérant que tous ont des performances comparables sur cet ensemble de données. Cependant, le modèle sélectionné offre un équilibre optimal entre précision et efficacité computationnelle.",
+        "de": "Es ist wichtig zu beachten, dass der McNemar-Test keine statistisch signifikanten Unterschiede zwischen den Modellen zeigte, was darauf hindeutet, dass alle eine vergleichbare Leistung auf diesem Datensatz aufweisen. Das ausgewählte Modell bietet jedoch ein optimales Gleichgewicht zwischen Genauigkeit und Recheneffizienz."
+    },
+    "no_best_model_found": {
+        "en": "Could not determine the best model due to lack of evaluation data.",
+        "es": "No se pudo determinar el mejor modelo debido a la falta de datos de evaluación.",
+        "fr": "Impossible de déterminer le meilleur modèle en raison du manque de données d'évaluation.",
+        "de": "Bestes Modell konnte aufgrund fehlender Evaluierungsdaten nicht ermittelt werden."
+    }
+}
