@@ -8,6 +8,11 @@ from torch import nn, optim
 from torch.utils.data import DataLoader, random_split
 from torchvision import datasets, transforms, models
 import time
+from scripts.hybrid_attention_model import HybridAttentionModel
+from scripts.hybrid_atuoencoder_model import HybridAutoencoderModel
+import albumentations as A
+from albumentations.pytorch import ToTensorV2
+import numpy as np
 
 DATASET_SLUG = "warcoder/potato-leaf-disease-dataset"
 DATASET_DIRNAME = "Potato Leaf Disease Dataset in Uncontrolled Environment"
@@ -56,20 +61,66 @@ def download_dataset(root: Path):
     return dataset_path
 
 
+def get_augmentation_pipeline():
+    return A.Compose([
+        A.CLAHE(p=1.0),
+        A.Rotate(limit=15, p=0.8),                 # Rotaciones ±15°
+        A.RandomScale(scale_limit=0.15, p=0.7),     # Zoom ±15%
+        A.ShiftScaleRotate(shift_limit=0.1, scale_limit=0.1, rotate_limit=0, p=0.5),  # Desplazamientos
+        A.RandomBrightnessContrast(p=0.5),
+        A.HorizontalFlip(p=0.5),
+        A.VerticalFlip(p=0.5)
+    ])
+
+class AlbumentationsDataset(datasets.ImageFolder):
+    def __init__(self, root, transform=None, albumentations_transform=None):
+        super().__init__(root, transform=transform)
+        self.albumentations_transform = albumentations_transform
+
+    def __getitem__(self, index):
+        path, target = self.samples[index]
+        sample = self.loader(path) # Carga la imagen PIL
+
+        if self.albumentations_transform is not None:
+            # Convertir PIL a NumPy array para Albumentations
+            image_np = np.array(sample)
+            augmented = self.albumentations_transform(image=image_np)
+            sample = augmented['image'] # La salida de Albumentations es un NumPy array
+
+        if self.transform is not None:
+            # Convertir NumPy a PIL si el transform de torchvision lo necesita, o directamente a tensor
+            # torchvision.transforms.ToTensor() espera PIL Image o numpy.ndarray (H x W x C)
+            sample = self.transform(sample)
+        
+        return sample, target
+
 def create_dataloaders(data_dir: Path, batch_size: int = 32, val_split: float = 0.2):
-    transform = transforms.Compose([
+    # Transformaciones comunes para todos los datasets (redimensionar y normalizar)
+    common_transforms = transforms.Compose([
         transforms.Resize((224, 224)),
-        transforms.ToTensor(),
+        transforms.ToTensor(), # Convierte a tensor y escala a [0, 1]
         transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
     ])
-    dataset = datasets.ImageFolder(str(data_dir), transform=transform)
-    val_size = int(len(dataset) * val_split)
-    train_size = len(dataset) - val_size
-    train_ds, val_ds = random_split(dataset, [train_size, val_size])
+
+    # Transformaciones de Albumentations para el conjunto de entrenamiento
+    train_alb_transform = get_augmentation_pipeline()
+    
+    # Para validación, solo las transformaciones comunes
+    val_alb_transform = A.Compose([
+        A.CLAHE(p=1.0), # CLAHE también para validación si es parte de la normalización
+    ])
+
+    # Crear datasets usando la clase personalizada
+    train_dataset = AlbumentationsDataset(str(data_dir), transform=common_transforms, albumentations_transform=train_alb_transform)
+    val_dataset = AlbumentationsDataset(str(data_dir), transform=common_transforms, albumentations_transform=val_alb_transform)
+
+    val_size = int(len(train_dataset) * val_split)
+    train_size = len(train_dataset) - val_size
+    train_ds, val_ds = random_split(train_dataset, [train_size, val_size])
 
     train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True)
     val_loader = DataLoader(val_ds, batch_size=batch_size, shuffle=False)
-    return train_loader, val_loader, len(dataset.classes)
+    return train_loader, val_loader, len(train_dataset.classes)
 
 
 
@@ -90,6 +141,10 @@ def main(args):
     elif args.model_arch == 'densenet121':
         model = models.densenet121(pretrained=True)
         model.classifier = nn.Linear(model.classifier.in_features, num_classes)
+    elif args.model_arch == 'hybrid_attention':
+        model = HybridAttentionModel(num_classes)
+    elif args.model_arch == 'hybrid_autoencoder':
+        model = HybridAutoencoderModel(num_classes)
     else:
         raise ValueError(f"Arquitectura de modelo no soportada: {args.model_arch}")
 

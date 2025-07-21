@@ -1,0 +1,14 @@
+__pycache__/
+
+*.pyc
+
+.env
+
+kaggle.json
+
+# Ignorar entornos virtuales
+venv/
+.venv/
+
+# Ignorar archivos de log
+*.log
