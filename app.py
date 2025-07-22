@@ -951,6 +951,9 @@ def load_translations_from_json(lang_code):
 CLASS_NAMES = ['Bacteria', 'Fungi', 'Healthy', 'Nematode', 'Pest', 'Phytophthora', 'Virus']
 CLASS_NAMES_ENGLISH = ['Bacteria', 'Fungi', 'Healthy', 'Nematode', 'Pest', 'Phytophthora', 'Virus'] # Mantener los nombres en inglés para el mapeo
 
+from scripts.hybrid_attention_model import HybridAttentionModel
+from scripts.hybrid_atuoencoder_model import HybridAutoencoderModel
+
 @st.cache_resource
 def load_models():
     models_dict = {}
@@ -978,6 +981,20 @@ def load_models():
     densenet121_model.load_state_dict(densenet121_state_dict)
     densenet121_model.eval()
     models_dict['DenseNet121'] = densenet121_model
+
+    # Load Hybrid Attention Model
+    hybrid_attention_model = HybridAttentionModel(num_classes=len(CLASS_NAMES))
+    hybrid_attention_state_dict = torch.load('models/potato_leaf_disease_model_hybrid_attention.pth', map_location='cpu')
+    hybrid_attention_model.load_state_dict(hybrid_attention_state_dict)
+    hybrid_attention_model.eval()
+    models_dict['Hybrid Attention'] = hybrid_attention_model
+
+    # Load Hybrid Autoencoder Model
+    hybrid_autoencoder_model = HybridAutoencoderModel(num_classes=len(CLASS_NAMES))
+    hybrid_autoencoder_state_dict = torch.load('models/potato_leaf_disease_model_hybrid_autoencoder.pth', map_location='cpu')
+    hybrid_autoencoder_model.load_state_dict(hybrid_autoencoder_state_dict)
+    hybrid_autoencoder_model.eval()
+    models_dict['Hybrid Autoencoder'] = hybrid_autoencoder_model
 
     return models_dict
 
@@ -1091,11 +1108,13 @@ def main():
             st.subheader(t['neural_network_models_subheader'])
             st.markdown(t['models_description'])
 
-            model_names = ['ResNet18', 'ResNet50', 'DenseNet121']
+            model_names = ['ResNet18', 'ResNet50', 'DenseNet121', 'Hybrid Attention', 'Hybrid Autoencoder']
             model_descriptions = {
                 'ResNet18': t['resnet18_desc'],
                 'ResNet50': t['resnet50_desc'],
-                'DenseNet121': t['densenet121_desc']
+                'DenseNet121': t['densenet121_desc'],
+                'Hybrid Attention': t['hybrid_attention_desc'],
+                'Hybrid Autoencoder': t['hybrid_autoencoder_desc']
             }
 
             for model_name in model_names:
@@ -1121,6 +1140,14 @@ def main():
             'DenseNet121': {
                 'confusion_matrix': 'confusion_matrix_densenet121.png',
                 'classification_report': 'classification_report_densenet121.txt'
+            },
+            'Hybrid Attention': {
+                'confusion_matrix': 'confusion_matrix_hybrid_attention.png',
+                'classification_report': 'classification_report_hybrid_attention.txt'
+            },
+            'Hybrid Autoencoder': {
+                'confusion_matrix': 'confusion_matrix_hybrid_autoencoder.png',
+                'classification_report': 'classification_report_hybrid_autoencoder.txt'
             }
         }
 
@@ -1728,15 +1755,20 @@ def generate_pdf_report(t, lang_code): # Pass translations and lang_code to gene
         model_accuracies = {}
         model_training_times = {}
         
-        for model_name in model_names:
-            eval_path = os.path.join(results_dir, f'evaluation_results_potato_leaf_disease_model_{model_name.lower()}.json')
-            history_path = os.path.join(results_dir, f'training_history_potato_leaf_disease_model_{model_name.lower()}.json')
+        # Actualizar la lista de nombres de modelos para incluir los híbridos
+        all_model_names = ['ResNet18', 'ResNet50', 'DenseNet121', 'Hybrid Attention', 'Hybrid Autoencoder']
+
+        for model_name in all_model_names:
+            eval_path = os.path.join(results_dir, f'evaluation_results_potato_leaf_disease_model_{model_name.lower().replace(" ", "_")}.json')
+            history_path = os.path.join(results_dir, f'training_history_{model_name.lower().replace(" ", "_")}C.json')
 
             if os.path.exists(eval_path):
                 with open(eval_path, 'r') as f:
                     eval_data = json.load(f)
-                    accuracy = np.sum(np.array(eval_data['correct_predictions'])) / len(eval_data['correct_predictions'])
-                    model_accuracies[model_name] = accuracy
+                    # Asegurarse de que 'correct_predictions' exista y no esté vacío
+                    if 'correct_predictions' in eval_data and len(eval_data['correct_predictions']) > 0:
+                        accuracy = sum(eval_data['correct_predictions']) / len(eval_data['correct_predictions'])
+                        model_accuracies[model_name] = accuracy
             
             if os.path.exists(history_path):
                 with open(history_path, 'r') as f:

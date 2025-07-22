@@ -254,9 +254,11 @@ def main(lang_code='en'): # Añadir lang_code como argumento
 
     # Definir los modelos y sus archivos
     models_info = [
-        {'name': 'ResNet18', 'history_file': 'training_history_potato_leaf_disease_model_resnet18.json', 'eval_file': 'evaluation_results_potato_leaf_disease_model_resnet18.json'},
-        {'name': 'ResNet50', 'history_file': 'training_history_potato_leaf_disease_model_resnet50.json', 'eval_file': 'evaluation_results_potato_leaf_disease_model_resnet50.json'},
-        {'name': 'DenseNet121', 'history_file': 'training_history_potato_leaf_disease_model_densenet121.json', 'eval_file': 'evaluation_results_potato_leaf_disease_model_densenet121.json'}
+        {'name': 'ResNet18', 'history_file': 'training_history_resnet18C.json', 'eval_file': 'evaluation_results_potato_leaf_disease_model_resnet18.json'},
+        {'name': 'ResNet50', 'history_file': 'training_history_resnet50C.json', 'eval_file': 'evaluation_results_potato_leaf_disease_model_resnet50.json'},
+        {'name': 'DenseNet121', 'history_file': 'training_history_densenet121C.json', 'eval_file': 'evaluation_results_potato_leaf_disease_model_densenet121.json'},
+        {'name': 'Hybrid Attention', 'history_file': 'training_history_hybrid_attentionC.json', 'eval_file': 'evaluation_results_potato_leaf_disease_model_hybrid_attention.json'},
+        {'name': 'Hybrid Autoencoder', 'history_file': 'training_history_hybrid_autoencoderC.json', 'eval_file': 'evaluation_results_potato_leaf_disease_model_hybrid_autoencoder.json'}
     ]
 
     all_histories = []

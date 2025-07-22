@@ -12,6 +12,15 @@ from statsmodels.stats.contingency_tables import mcnemar
 import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
+import sys
+
+# Añadir el directorio raíz del proyecto al sys.path
+# Esto permite que las importaciones relativas como 'scripts.hybrid_attention_model' funcionen
+project_root = Path(__file__).resolve().parent.parent
+sys.path.append(str(project_root))
+
+from scripts.hybrid_attention_model import HybridAttentionModel
+from scripts.hybrid_atuoencoder_model import HybridAutoencoderModel
 
 DATASET_SLUG = "warcoder/potato-leaf-disease-dataset"
 DATASET_DIRNAME = "Potato Leaf Disease Dataset in Uncontrolled Environment"
@@ -142,57 +151,78 @@ def main(args):
     val_loader, class_names = create_dataloaders(dataset_path, batch_size=args.batch_size)
 
     num_classes = len(class_names)
-    
-    model_arch_name = args.model_arch # Obtener el nombre de la arquitectura del modelo
-
-    # Seleccionar la arquitectura del modelo
-    if model_arch_name == 'resnet18':
-        model = models.resnet18(pretrained=False)
-        model.fc = nn.Linear(model.fc.in_features, num_classes)
-    elif model_arch_name == 'resnet50':
-        model = models.resnet50(pretrained=False)
-        model.fc = nn.Linear(model.fc.in_features, num_classes)
-    elif model_arch_name == 'densenet121':
-        model = models.densenet121(pretrained=False)
-        model.classifier = nn.Linear(model.classifier.in_features, num_classes)
-    else:
-        raise ValueError(f"Arquitectura de modelo no soportada: {model_arch_name}")
-
-    # Cargar el modelo entrenado
-    model_path = Path(args.model_path)
-    if not model_path.exists():
-        raise FileNotFoundError(f"No se encontró el archivo del modelo en: {model_path}")
-    
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    model.load_state_dict(torch.load(model_path, map_location=device))
-    print(f"Modelo cargado exitosamente desde {model_path}")
 
-    all_labels, all_preds, all_correct_predictions, mcc = evaluate_model(model, val_loader, device, class_names, model_arch_name)
-    
-    # Convertir a arrays de numpy para facilitar el procesamiento y luego a listas para JSON
-    all_labels = np.array(all_labels).tolist()
-    all_preds = np.array(all_preds).tolist()
-    all_correct_predictions = np.array(all_correct_predictions).tolist()
+    model_dir = Path("models")
+    model_files = list(model_dir.glob("*.pth"))
 
-    # Guardar las predicciones y etiquetas para análisis posterior (correlación, etc.)
-    evaluation_results = {
-        'labels': all_labels,
-        'predictions': all_preds,
-        'correct_predictions': all_correct_predictions,
-        'class_names': class_names,
-        'matthews_corrcoef': mcc
-    }
-    results_filename = f"evaluation_results_{Path(args.model_path).stem}.json"
-    with open(Path("results") / results_filename, 'w') as f:
-        json.dump(evaluation_results, f)
-    print(f"Resultados de evaluación guardados en results/{results_filename}")
+    if not model_files:
+        print("No se encontraron archivos de modelo (.pth) en el directorio 'models/'.")
+        return
+
+    for model_path in model_files:
+        model_name_stem = model_path.stem
+        # Extraer el nombre de la arquitectura del nombre del archivo
+        # Asume el formato "potato_leaf_disease_model_<arquitectura>.pth"
+        if model_name_stem.startswith("potato_leaf_disease_model_"):
+            model_arch_name = model_name_stem.replace("potato_leaf_disease_model_", "")
+        else:
+            print(f"Saltando archivo de modelo con formato desconocido: {model_path.name}")
+            continue
+
+        print(f"\nEvaluando el modelo: {model_arch_name} desde {model_path}")
+
+        # Seleccionar la arquitectura del modelo
+        if model_arch_name == 'resnet18':
+            model = models.resnet18(pretrained=False)
+            model.fc = nn.Linear(model.fc.in_features, num_classes)
+        elif model_arch_name == 'resnet50':
+            model = models.resnet50(pretrained=False)
+            model.fc = nn.Linear(model.fc.in_features, num_classes)
+        elif model_arch_name == 'densenet121':
+            model = models.densenet121(pretrained=False)
+            model.classifier = nn.Linear(model.classifier.in_features, num_classes)
+        elif model_arch_name == 'hybrid_attention':
+            model = HybridAttentionModel(num_classes=num_classes)
+        elif model_arch_name == 'hybrid_autoencoder':
+            model = HybridAutoencoderModel(num_classes=num_classes)
+        else:
+            print(f"Arquitectura de modelo no soportada o no reconocida: {model_arch_name}. Saltando.")
+            continue
+
+        # Cargar el modelo entrenado
+        try:
+            model.load_state_dict(torch.load(model_path, map_location=device))
+            print(f"Modelo cargado exitosamente desde {model_path}")
+        except Exception as e:
+            print(f"Error al cargar el modelo {model_path}: {e}. Saltando.")
+            continue
+
+        all_labels, all_preds, all_correct_predictions, mcc = evaluate_model(model, val_loader, device, class_names, model_arch_name)
+        
+        # Convertir a arrays de numpy para facilitar el procesamiento y luego a listas para JSON
+        all_labels_list = np.array(all_labels).tolist()
+        all_preds_list = np.array(all_preds).tolist()
+        all_correct_predictions_list = np.array(all_correct_predictions).tolist()
+
+        # Guardar las predicciones y etiquetas para análisis posterior (correlación, etc.)
+        evaluation_results = {
+            'labels': all_labels_list,
+            'predictions': all_preds_list,
+            'correct_predictions': all_correct_predictions_list,
+            'class_names': class_names,
+            'matthews_corrcoef': mcc
+        }
+        results_filename = f"evaluation_results_{model_arch_name.lower()}.json"
+        with open(Path("results") / results_filename, 'w') as f:
+            json.dump(evaluation_results, f, indent=4)
+        print(f"Resultados de evaluación guardados en results/{results_filename}")
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Evaluate Potato Leaf Disease Model")
+    parser = argparse.ArgumentParser(description="Evaluate Potato Leaf Disease Models")
     parser.add_argument('--data-dir', type=str, default='data', help='Directory to store dataset')
-    parser.add_argument('--model-path', type=str, default='models/potato_leaf_disease_model.pth', help='Path to the trained model .pth file')
     parser.add_argument('--batch-size', type=int, default=32, help='Batch size for evaluation')
-    parser.add_argument('--model-arch', type=str, default='resnet18', help='Model architecture used for training (e.g., resnet18, resnet50)')
+    # Eliminamos --model-path y --model-arch ya que ahora se iterará sobre todos los modelos
     args = parser.parse_args()
     main(args)
