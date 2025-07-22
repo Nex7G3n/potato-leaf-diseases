@@ -95,24 +95,30 @@ class AlbumentationsDataset(datasets.ImageFolder):
         return sample, target
 
 def create_dataloaders(data_dir: Path, batch_size: int = 32, val_split: float = 0.2):
-    # Transformaciones comunes para todos los datasets (redimensionar y normalizar)
-    common_transforms = transforms.Compose([
-        transforms.Resize((224, 224)),
-        transforms.ToTensor(), # Convierte a tensor y escala a [0, 1]
+    # Transformaciones comunes para todos los datasets (solo normalización ahora)
+    common_normalize_transform = transforms.Compose([
         transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
     ])
 
     # Transformaciones de Albumentations para el conjunto de entrenamiento
-    train_alb_transform = get_augmentation_pipeline()
+    train_alb_transform = A.Compose([
+        A.Resize(224, 224), # Redimensionar primero
+        get_augmentation_pipeline(), # Luego las aumentaciones
+        ToTensorV2(),       # Convertir a tensor
+    ])
     
-    # Para validación, solo las transformaciones comunes
+    # Para validación, solo redimensionar y convertir a tensor, y CLAHE si es necesario
     val_alb_transform = A.Compose([
-        A.CLAHE(p=1.0), # CLAHE también para validación si es parte de la normalización
+        A.Resize(224, 224), # Redimensionar
+        A.CLAHE(p=1.0),     # CLAHE también para validación si es parte de la normalización
+        ToTensorV2(),       # Convertir a tensor
     ])
 
     # Crear datasets usando la clase personalizada
-    train_dataset = AlbumentationsDataset(str(data_dir), transform=common_transforms, albumentations_transform=train_alb_transform)
-    val_dataset = AlbumentationsDataset(str(data_dir), transform=common_transforms, albumentations_transform=val_alb_transform)
+    # Aquí, el `transform` de Albumentations se encarga de la conversión a tensor y redimensionamiento.
+    # El `transform` de torchvision solo se usará para la normalización.
+    train_dataset = AlbumentationsDataset(str(data_dir), transform=common_normalize_transform, albumentations_transform=train_alb_transform)
+    val_dataset = AlbumentationsDataset(str(data_dir), transform=common_normalize_transform, albumentations_transform=val_alb_transform)
 
     val_size = int(len(train_dataset) * val_split)
     train_size = len(train_dataset) - val_size
