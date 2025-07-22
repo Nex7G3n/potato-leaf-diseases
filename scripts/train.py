@@ -101,16 +101,16 @@ def create_dataloaders(data_dir: Path, batch_size: int = 32, val_split: float = 
 
     # Transformaciones de Albumentations para el conjunto de entrenamiento
     train_alb_transform = A.Compose([
-        A.Resize(224, 224), # Redimensionar primero
-        get_augmentation_pipeline(), # Luego las aumentaciones
+        get_augmentation_pipeline(), # Primero las aumentaciones
+        A.Resize(224, 224), # Redimensionar al final para asegurar tamaño uniforme
         A.ToFloat(max_value=255.0), # Convertir a float y escalar a [0, 1]
         ToTensorV2(),       # Convertir a tensor
     ])
     
-    # Para validación, solo redimensionar y convertir a tensor, y CLAHE si es necesario
+    # Para validación, solo CLAHE, redimensionar y convertir a tensor
     val_alb_transform = A.Compose([
-        A.Resize(224, 224), # Redimensionar
         A.CLAHE(p=1.0),     # CLAHE también para validación si es parte de la normalización
+        A.Resize(224, 224), # Redimensionar al final para asegurar tamaño uniforme
         A.ToFloat(max_value=255.0), # Convertir a float y escalar a [0, 1]
         ToTensorV2(),       # Convertir a tensor
     ])
