@@ -7,6 +7,7 @@ import torch
 from torch import nn, optim
 from torch.utils.data import DataLoader, random_split
 from torchvision import datasets, transforms, models
+from torchvision.models import ResNet18_Weights, ResNet50_Weights, DenseNet121_Weights
 import time
 from scripts.hybrid_attention_model import HybridAttentionModel
 from scripts.hybrid_atuoencoder_model import HybridAutoencoderModel
@@ -66,7 +67,7 @@ def get_augmentation_pipeline():
         A.CLAHE(p=1.0),
         A.Rotate(limit=15, p=0.8),                 # Rotaciones ±15°
         A.RandomScale(scale_limit=0.15, p=0.7),     # Zoom ±15%
-        A.ShiftScaleRotate(shift_limit=0.1, scale_limit=0.1, rotate_limit=0, p=0.5),  # Desplazamientos
+        A.Affine(scale=(0.9, 1.1), translate_percent=(0.1, 0.1), rotate=(0, 0), p=0.5), # Desplazamientos, escala y rotación usando Affine
         A.RandomBrightnessContrast(p=0.5),
         A.HorizontalFlip(p=0.5),
         A.VerticalFlip(p=0.5)
@@ -140,13 +141,13 @@ def main(args):
 
     # Seleccionar la arquitectura del modelo
     if args.model_arch == 'resnet18':
-        model = models.resnet18(pretrained=True)
+        model = models.resnet18(weights=ResNet18_Weights.DEFAULT)
         model.fc = nn.Linear(model.fc.in_features, num_classes)
     elif args.model_arch == 'resnet50':
-        model = models.resnet50(pretrained=True)
+        model = models.resnet50(weights=ResNet50_Weights.DEFAULT)
         model.fc = nn.Linear(model.fc.in_features, num_classes)
     elif args.model_arch == 'densenet121':
-        model = models.densenet121(pretrained=True)
+        model = models.densenet121(weights=DenseNet121_Weights.DEFAULT)
         model.classifier = nn.Linear(model.classifier.in_features, num_classes)
     elif args.model_arch == 'hybrid_attention':
         model = HybridAttentionModel(num_classes)
