@@ -127,8 +127,8 @@ def plot_training_time_comparison(histories, model_names, save_path, t):
     plt.close()
     print(f"Gráfico de tiempo de entrenamiento comparativo guardado en {save_path / 'training_time_comparison.png'}")
 
-def plot_confusion_matrix(true_labels, predictions, model_name, class_names_english, save_path, t):
-    cm = confusion_matrix(true_labels, predictions, labels=range(len(class_names_english)))
+def plot_confusion_matrix(labels, predictions, model_name, class_names_english, save_path, t):
+    cm = confusion_matrix(labels, predictions, labels=range(len(class_names_english)))
     
     # Traducir los nombres de las clases para las etiquetas del gráfico
     translated_class_names = [t['class_names_map'][name] for name in class_names_english]
@@ -173,17 +173,17 @@ def plot_prediction_correlation_matrix(predictions_list, model_names, class_name
     plt.close()
     print(f"Matriz de correlación de predicciones guardada en {save_path / f'prediction_correlation_matrix_{model_names[0]}_vs_{model_names[1]}.png'}")
 
-def plot_roc_curve(true_labels, predicted_probabilities, model_name, class_names_english, save_path, t):
+def plot_roc_curve(labels, predicted_probabilities, model_name, class_names_english, save_path, t):
     plt.figure(figsize=(10, 8))
     
     # Convertir las etiquetas verdaderas a formato one-hot si es necesario
-    # Asumimos que true_labels son índices de clase
+    # Asumimos que labels son índices de clase
     n_classes = len(class_names_english)
-    true_labels_one_hot = np.eye(n_classes)[true_labels]
+    labels_one_hot = np.eye(n_classes)[labels]
 
     # Calcular la curva ROC y el AUC para cada clase
     for i, class_name_english in enumerate(class_names_english):
-        fpr, tpr, _ = roc_curve(true_labels_one_hot[:, i], np.array(predicted_probabilities)[:, i])
+        fpr, tpr, _ = roc_curve(labels_one_hot[:, i], np.array(predicted_probabilities)[:, i])
         roc_auc = auc(fpr, tpr)
         plt.plot(fpr, tpr, label=f'{t["class_names_map"][class_name_english]} (AUC = {roc_auc:.2f})')
 
@@ -254,11 +254,11 @@ def main(lang_code='en'): # Añadir lang_code como argumento
 
     # Definir los modelos y sus archivos
     models_info = [
-        {'name': 'ResNet18', 'history_file': 'training_history_resnet18C.json', 'eval_file': 'evaluation_results_potato_leaf_disease_model_resnet18.json'},
-        {'name': 'ResNet50', 'history_file': 'training_history_resnet50C.json', 'eval_file': 'evaluation_results_potato_leaf_disease_model_resnet50.json'},
-        {'name': 'DenseNet121', 'history_file': 'training_history_densenet121C.json', 'eval_file': 'evaluation_results_potato_leaf_disease_model_densenet121.json'},
-        {'name': 'Hybrid Attention', 'history_file': 'training_history_hybrid_attentionC.json', 'eval_file': 'evaluation_results_potato_leaf_disease_model_hybrid_attention.json'},
-        {'name': 'Hybrid Autoencoder', 'history_file': 'training_history_hybrid_autoencoderC.json', 'eval_file': 'evaluation_results_potato_leaf_disease_model_hybrid_autoencoder.json'}
+        {'name': 'ResNet18', 'history_file': 'training_history_resnet18C.json', 'eval_file': 'evaluation_results_resnet18.json'},
+        {'name': 'ResNet50', 'history_file': 'training_history_resnet50C.json', 'eval_file': 'evaluation_results_resnet50.json'},
+        {'name': 'DenseNet121', 'history_file': 'training_history_densenet121C.json', 'eval_file': 'evaluation_results_densenet121.json'},
+        {'name': 'Hybrid Attention', 'history_file': 'training_history_hybrid_attentionC.json', 'eval_file': 'evaluation_results_hybrid_attention.json'},
+        {'name': 'Hybrid Autoencoder', 'history_file': 'training_history_hybrid_autoencoderC.json', 'eval_file': 'evaluation_results_hybrid_autoencoder.json'}
     ]
 
     all_histories = []
@@ -297,16 +297,16 @@ def main(lang_code='en'): # Añadir lang_code como argumento
             all_correct_predictions_for_hist.append(eval_results['correct_predictions'])
 
             # Generar matriz de confusión
-            if 'true_labels' in eval_results and 'predictions' in eval_results:
-                plot_confusion_matrix(eval_results['true_labels'], eval_results['predictions'], model_name, eval_results['class_names'], results_dir, t)
+            if 'labels' in eval_results and 'predictions' in eval_results:
+                plot_confusion_matrix(eval_results['labels'], eval_results['predictions'], model_name, eval_results['class_names'], results_dir, t)
             else:
-                print(f"Advertencia: Datos de etiquetas verdaderas o predicciones no encontrados para la matriz de confusión de {model_name}.")
+                print(f"Advertencia: Datos de etiquetas (labels) o predicciones no encontrados para la matriz de confusión de {model_name}.")
 
             # Generar curva ROC
-            if 'true_labels' in eval_results and 'predicted_probabilities' in eval_results:
-                plot_roc_curve(eval_results['true_labels'], eval_results['predicted_probabilities'], model_name, eval_results['class_names'], results_dir, t)
+            if 'labels' in eval_results and 'predicted_probabilities' in eval_results:
+                plot_roc_curve(eval_results['labels'], eval_results['predicted_probabilities'], model_name, eval_results['class_names'], results_dir, t)
             else:
-                print(f"Advertencia: Datos de etiquetas verdaderas o probabilidades predichas no encontrados para la curva ROC de {model_name}.")
+                print(f"Advertencia: Datos de etiquetas (labels) o probabilidades predichas no encontrados para la curva ROC de {model_name}.")
 
         else:
             print(f"Advertencia: Resultados de evaluación no encontrados para {model_name} en {eval_path}")

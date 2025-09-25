@@ -1,0 +1,92 @@
+[
+    {
+        "model1": "ResNet18",
+        "model2": "ResNet50",
+        "results": {
+            "statistic": 0.9846153846153847,
+            "pvalue": 0.3210619922539037,
+            "conclusion": "No hay una diferencia significativa entre ResNet18 y ResNet50 (p >= 0.05)."
+        }
+    },
+    {
+        "model1": "ResNet18",
+        "model2": "DenseNet121",
+        "results": {
+            "statistic": 0.125,
+            "pvalue": 0.7236736098317629,
+            "conclusion": "No hay una diferencia significativa entre ResNet18 y DenseNet121 (p >= 0.05)."
+        }
+    },
+    {
+        "model1": "ResNet18",
+        "model2": "Hybrid Attention",
+        "results": {
+            "statistic": 1.890625,
+            "pvalue": 0.16913144470266755,
+            "conclusion": "No hay una diferencia significativa entre ResNet18 y Hybrid Attention (p >= 0.05)."
+        }
+    },
+    {
+        "model1": "ResNet18",
+        "model2": "Hybrid Autoencoder",
+        "results": {
+            "statistic": 1.635135135135135,
+            "pvalue": 0.20099425588307607,
+            "conclusion": "No hay una diferencia significativa entre ResNet18 y Hybrid Autoencoder (p >= 0.05)."
+        }
+    },
+    {
+        "model1": "ResNet50",
+        "model2": "DenseNet121",
+        "results": {
+            "statistic": 0.25396825396825395,
+            "pvalue": 0.6142946646634824,
+            "conclusion": "No hay una diferencia significativa entre ResNet50 y DenseNet121 (p >= 0.05)."
+        }
+    },
+    {
+        "model1": "ResNet50",
+        "model2": "Hybrid Attention",
+        "results": {
+            "statistic": 0.07017543859649122,
+            "pvalue": 0.7910815129207817,
+            "conclusion": "No hay una diferencia significativa entre ResNet50 y Hybrid Attention (p >= 0.05)."
+        }
+    },
+    {
+        "model1": "ResNet50",
+        "model2": "Hybrid Autoencoder",
+        "results": {
+            "statistic": 0.07017543859649122,
+            "pvalue": 0.7910815129207817,
+            "conclusion": "No hay una diferencia significativa entre ResNet50 y Hybrid Autoencoder (p >= 0.05)."
+        }
+    },
+    {
+        "model1": "DenseNet121",
+        "model2": "Hybrid Attention",
+        "results": {
+            "statistic": 0.7903225806451613,
+            "pvalue": 0.37400260202603475,
+            "conclusion": "No hay una diferencia significativa entre DenseNet121 y Hybrid Attention (p >= 0.05)."
+        }
+    },
+    {
+        "model1": "DenseNet121",
+        "model2": "Hybrid Autoencoder",
+        "results": {
+            "statistic": 0.765625,
+            "pvalue": 0.38157390570502125,
+            "conclusion": "No hay una diferencia significativa entre DenseNet121 y Hybrid Autoencoder (p >= 0.05)."
+        }
+    },
+    {
+        "model1": "Hybrid Attention",
+        "model2": "Hybrid Autoencoder",
+        "results": {
+            "statistic": 0.02,
+            "pvalue": 0.887537083981715,
+            "conclusion": "No hay una diferencia significativa entre Hybrid Attention y Hybrid Autoencoder (p >= 0.05)."
+        }
+    }
+]

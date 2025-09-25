@@ -1151,39 +1151,83 @@ def main():
             }
         }
 
-        for model_name, files in model_results_info.items():
-            with st.expander(f"{t['detailed_results_for']} {model_name}"):
-                col_cm, col_cr = st.columns(2)
+        model_names_for_selection = ['ResNet18', 'ResNet50', 'DenseNet121', 'Hybrid Attention', 'Hybrid Autoencoder']
+        selected_model_for_eval = st.selectbox(t['detailed_results_for'], model_names_for_selection)
 
-                with col_cm:
-                    st.subheader(f"{t['confusion_matrix_for']} {model_name}:")
-                    cm_path = os.path.join(results_dir, files['confusion_matrix'])
-                    if os.path.exists(cm_path):
-                        st.image(cm_path, caption=f"{t['confusion_matrix_for']} {model_name}")
-                    else:
-                        st.info(f"{t['no_confusion_matrix']} {model_name}.")
+        # Mostrar la matriz de confusión, el informe de clasificación y la curva ROC para el modelo seleccionado
+        model_results_info = {
+            'ResNet18': {
+                'confusion_matrix': 'confusion_matrix_resnet18.png',
+                'classification_report': 'classification_report_resnet18.txt',
+                'roc_curve': 'roc_curve_ResNet18.png'
+            },
+            'ResNet50': {
+                'confusion_matrix': 'confusion_matrix_resnet50.png',
+                'classification_report': 'classification_report_resnet50.txt',
+                'roc_curve': 'roc_curve_ResNet50.png'
+            },
+            'DenseNet121': {
+                'confusion_matrix': 'confusion_matrix_densenet121.png',
+                'classification_report': 'classification_report_densenet121.txt',
+                'roc_curve': 'roc_curve_DenseNet121.png'
+            },
+            'Hybrid Attention': {
+                'confusion_matrix': 'confusion_matrix_hybrid attention.png', # Corregido el nombre del archivo
+                'classification_report': 'classification_report_hybrid_attention.txt',
+                'roc_curve': 'roc_curve_Hybrid Attention.png'
+            },
+            'Hybrid Autoencoder': {
+                'confusion_matrix': 'confusion_matrix_hybrid autoencoder.png', # Corregido el nombre del archivo
+                'classification_report': 'classification_report_hybrid_autoencoder.txt',
+                'roc_curve': 'roc_curve_Hybrid Autoencoder.png'
+            }
+        }
 
-                with col_cr:
-                    st.subheader(f"{t['classification_report_for']} {model_name}:")
-                    cr_path = os.path.join(results_dir, files['classification_report'])
-                    if os.path.exists(cr_path):
-                        with open(cr_path, 'r') as f:
-                            st.text(f.read())
-                    else:
-                        st.info(f"{t['no_classification_report']} {model_name}.")
-                    
-                    # Mostrar el Coeficiente de Correlación de Matthews (MCC)
-                    eval_json_path = os.path.join(results_dir, f'evaluation_results_potato_leaf_disease_model_{model_name.lower()}.json')
-                    if os.path.exists(eval_json_path):
-                        with open(eval_json_path, 'r') as f:
-                            eval_data = json.load(f)
-                            if 'matthews_corrcoef' in eval_data:
-                                st.subheader(f"{t['matthews_corrcoef_for']} {model_name}:")
-                                st.write(f"**MCC:** {eval_data['matthews_corrcoef']:.4f}")
-                            else:
-                                st.info(f"{t['no_matthews_corrcoef']} {model_name}.")
-                    else:
-                        st.info(f"{t['no_evaluation_results']} {model_name}.")
+        if selected_model_for_eval:
+            files = model_results_info[selected_model_for_eval]
+            
+            st.subheader(f"{t['detailed_results_for']} {selected_model_for_eval}")
+            
+            col_cm, col_cr = st.columns(2)
+
+            with col_cm:
+                st.subheader(f"{t['confusion_matrix_for']} {selected_model_for_eval}:")
+                cm_path = os.path.join(results_dir, files['confusion_matrix'])
+                if os.path.exists(cm_path):
+                    st.image(cm_path, caption=f"{t['confusion_matrix_for']} {selected_model_for_eval}", width=400) # Ajustar tamaño
+                else:
+                    st.info(f"{t['no_confusion_matrix']} {selected_model_for_eval}.")
+
+            with col_cr:
+                st.subheader(f"{t['classification_report_for']} {selected_model_for_eval}:")
+                cr_path = os.path.join(results_dir, files['classification_report'])
+                if os.path.exists(cr_path):
+                    with open(cr_path, 'r') as f:
+                        st.text(f.read())
+                else:
+                    st.info(f"{t['no_classification_report']} {selected_model_for_eval}.")
+                
+                # Mostrar el Coeficiente de Correlación de Matthews (MCC)
+                eval_json_path = os.path.join(results_dir, f'evaluation_results_{selected_model_for_eval.lower().replace(" ", "_")}.json')
+                if os.path.exists(eval_json_path):
+                    with open(eval_json_path, 'r') as f:
+                        eval_data = json.load(f)
+                        if 'matthews_corrcoef' in eval_data:
+                            st.subheader(f"{t['matthews_corrcoef_for']} {selected_model_for_eval}:")
+                            st.write(f"**MCC:** {eval_data['matthews_corrcoef']:.4f}")
+                        else:
+                            st.info(f"{t['no_matthews_corrcoef']} {selected_model_for_eval}.")
+                else:
+                    st.info(f"{t['no_evaluation_results']} {selected_model_for_eval}.")
+
+            # Mostrar la Curva ROC para el modelo seleccionado
+            st.markdown("---")
+            st.subheader(f"{t['roc_curve_title']} {selected_model_for_eval}:")
+            roc_path = os.path.join(results_dir, files['roc_curve'])
+            if os.path.exists(roc_path):
+                st.image(roc_path, caption=f"{t['roc_curve_title']} {selected_model_for_eval}", width=600) # Ajustar tamaño
+            else:
+                st.info(f"No se encontró la curva ROC para {selected_model_for_eval}.")
 
         st.markdown("---") # Separador
 
@@ -1272,7 +1316,14 @@ def main():
             'prediction_correlation_matrix.png', # Eliminar esta imagen
             'prediction_correlation_matrix_ResNet18_vs_DenseNet121.png',
             'prediction_correlation_matrix_ResNet18_vs_ResNet50.png',
-            'prediction_correlation_matrix_ResNet50_vs_DenseNet121.png'
+            'prediction_correlation_matrix_ResNet50_vs_DenseNet121.png',
+            'roc_curve_ResNet18.png', # Excluir las curvas ROC individuales
+            'roc_curve_ResNet50.png',
+            'roc_curve_DenseNet121.png',
+            'roc_curve_Hybrid Attention.png',
+            'roc_curve_Hybrid Autoencoder.png',
+            'confusion_matrix_hybrid attention.png', # Excluir matrices de confusión de modelos híbridos (nombre corregido)
+            'confusion_matrix_hybrid autoencoder.png' # Excluir matrices de confusión de modelos híbridos (nombre corregido)
         ]
 
         other_image_files = [f for f in all_image_files if f not in specific_cm_files and f not in plots_to_exclude]

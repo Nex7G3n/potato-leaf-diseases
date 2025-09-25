@@ -97,6 +97,7 @@ def evaluate_model(model, val_loader, device, class_names, model_arch_name):
     all_preds = []
     all_labels = []
     all_correct_predictions = []
+    all_predicted_probabilities = [] # Nueva lista para probabilidades
 
     with torch.no_grad():
         for inputs, labels in val_loader:
@@ -104,9 +105,12 @@ def evaluate_model(model, val_loader, device, class_names, model_arch_name):
             outputs = model(inputs)
             preds = outputs.argmax(dim=1)
             
+            probabilities = torch.softmax(outputs, dim=1) # Calcular probabilidades
+            
             all_preds.extend(preds.cpu().numpy())
             all_labels.extend(labels.cpu().numpy())
             all_correct_predictions.extend((preds == labels).cpu().numpy())
+            all_predicted_probabilities.extend(probabilities.cpu().numpy()) # Guardar probabilidades
 
     # Calcular y guardar la matriz de confusión
     cm = confusion_matrix(all_labels, all_preds)
@@ -141,7 +145,7 @@ def evaluate_model(model, val_loader, device, class_names, model_arch_name):
     mcc = matthews_corrcoef(all_labels, all_preds)
     print(f"\nCoeficiente de Correlación de Matthews (MCC) para {model_arch_name}: {mcc:.4f}")
     
-    return all_labels, all_preds, all_correct_predictions, mcc
+    return all_labels, all_preds, all_correct_predictions, mcc, all_predicted_probabilities
 
 
 def main(args):
@@ -198,12 +202,13 @@ def main(args):
             print(f"Error al cargar el modelo {model_path}: {e}. Saltando.")
             continue
 
-        all_labels, all_preds, all_correct_predictions, mcc = evaluate_model(model, val_loader, device, class_names, model_arch_name)
+        all_labels, all_preds, all_correct_predictions, mcc, all_predicted_probabilities = evaluate_model(model, val_loader, device, class_names, model_arch_name)
         
         # Convertir a arrays de numpy para facilitar el procesamiento y luego a listas para JSON
         all_labels_list = np.array(all_labels).tolist()
         all_preds_list = np.array(all_preds).tolist()
         all_correct_predictions_list = np.array(all_correct_predictions).tolist()
+        all_predicted_probabilities_list = np.array(all_predicted_probabilities).tolist() # Convertir probabilidades a lista
 
         # Guardar las predicciones y etiquetas para análisis posterior (correlación, etc.)
         evaluation_results = {
@@ -211,7 +216,8 @@ def main(args):
             'predictions': all_preds_list,
             'correct_predictions': all_correct_predictions_list,
             'class_names': class_names,
-            'matthews_corrcoef': mcc
+            'matthews_corrcoef': mcc,
+            'predicted_probabilities': all_predicted_probabilities_list # Añadir probabilidades
         }
         results_filename = f"evaluation_results_{model_arch_name.lower()}.json"
         with open(Path("results") / results_filename, 'w') as f:
