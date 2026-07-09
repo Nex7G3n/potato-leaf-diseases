@@ -1014,13 +1014,183 @@ def predict(image: Image.Image, model: torch.nn.Module):
         confidence = probabilities[predicted_class_idx].item() * 100
     return predicted_class_name, confidence, probabilities.tolist()
 
+def apply_theme_styles(dark_mode: bool):
+    if dark_mode:
+        colors_theme = {
+            "background": "#0e1117",
+            "sidebar": "#111827",
+            "surface": "#1a1f2b",
+            "surface_alt": "#202938",
+            "text": "#f8fafc",
+            "muted_text": "#d1d5db",
+            "border": "#374151",
+            "primary": "#4f8cff",
+            "primary_hover": "#3b73db",
+            "input": "#111827",
+            "alert": "#172033",
+        }
+    else:
+        colors_theme = {
+            "background": "#ffffff",
+            "sidebar": "#f7f8fa",
+            "surface": "#ffffff",
+            "surface_alt": "#f3f4f6",
+            "text": "#111827",
+            "muted_text": "#4b5563",
+            "border": "#d1d5db",
+            "primary": "#2563eb",
+            "primary_hover": "#1d4ed8",
+            "input": "#ffffff",
+            "alert": "#eff6ff",
+        }
+
+    st.markdown(f"""
+    <style>
+    :root {{
+        --app-background: {colors_theme["background"]};
+        --app-sidebar: {colors_theme["sidebar"]};
+        --app-surface: {colors_theme["surface"]};
+        --app-surface-alt: {colors_theme["surface_alt"]};
+        --app-text: {colors_theme["text"]};
+        --app-muted-text: {colors_theme["muted_text"]};
+        --app-border: {colors_theme["border"]};
+        --app-primary: {colors_theme["primary"]};
+        --app-primary-hover: {colors_theme["primary_hover"]};
+        --app-input: {colors_theme["input"]};
+        --app-alert: {colors_theme["alert"]};
+    }}
+
+    .stApp,
+    [data-testid="stAppViewContainer"],
+    [data-testid="stHeader"],
+    [data-testid="stToolbar"] {{
+        background-color: var(--app-background) !important;
+        color: var(--app-text) !important;
+    }}
+
+    [data-testid="stSidebar"],
+    [data-testid="stSidebarContent"] {{
+        background-color: var(--app-sidebar) !important;
+        color: var(--app-text) !important;
+    }}
+
+    [data-testid="stMarkdownContainer"],
+    [data-testid="stMarkdownContainer"] *,
+    [data-testid="stSidebar"] *,
+    label,
+    p,
+    li,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {{
+        color: var(--app-text) !important;
+    }}
+
+    small,
+    [data-testid="stCaptionContainer"],
+    [data-testid="stWidgetLabel"] p {{
+        color: var(--app-muted-text) !important;
+    }}
+
+    hr {{
+        border-color: var(--app-border) !important;
+    }}
+
+    .stButton > button,
+    [data-testid="stDownloadButton"] button {{
+        background-color: var(--app-primary) !important;
+        color: #ffffff !important;
+        border: 1px solid var(--app-primary) !important;
+    }}
+
+    .stButton > button:hover,
+    [data-testid="stDownloadButton"] button:hover {{
+        background-color: var(--app-primary-hover) !important;
+        border-color: var(--app-primary-hover) !important;
+        color: #ffffff !important;
+    }}
+
+    div[data-baseweb="select"] > div,
+    div[data-baseweb="input"],
+    input,
+    textarea {{
+        background-color: var(--app-input) !important;
+        color: var(--app-text) !important;
+        border-color: var(--app-border) !important;
+    }}
+
+    div[data-baseweb="select"] span,
+    div[data-baseweb="popover"] *,
+    ul[role="listbox"] *,
+    li[role="option"] {{
+        color: var(--app-text) !important;
+    }}
+
+    div[data-baseweb="popover"] > div,
+    ul[role="listbox"],
+    li[role="option"] {{
+        background-color: var(--app-surface) !important;
+    }}
+
+    li[role="option"]:hover {{
+        background-color: var(--app-surface-alt) !important;
+    }}
+
+    [data-testid="stExpander"] details,
+    [data-testid="stDataFrame"],
+    [data-testid="stTable"],
+    [data-testid="stFileUploaderDropzone"] {{
+        background-color: var(--app-surface) !important;
+        color: var(--app-text) !important;
+        border-color: var(--app-border) !important;
+    }}
+
+    [data-testid="stFileUploaderDropzone"] * {{
+        color: var(--app-text) !important;
+    }}
+
+    div[role="alert"],
+    [data-testid="stAlert"],
+    [data-testid="stInfo"],
+    [data-testid="stSuccess"],
+    [data-testid="stError"] {{
+        background-color: var(--app-alert) !important;
+        color: var(--app-text) !important;
+        border-color: var(--app-border) !important;
+    }}
+
+    [data-testid="stMetric"],
+    [data-testid="stMetric"] * {{
+        color: var(--app-text) !important;
+    }}
+    </style>
+    """, unsafe_allow_html=True)
+
 def main():
     # Inicializar session_state para el historial de predicciones si no existe
     if 'prediction_history' not in st.session_state:
         st.session_state.prediction_history = []
 
+    if 'dark_mode' not in st.session_state:
+        st.session_state.dark_mode = False
+
     st.set_page_config(page_title='Detector de Enfermedades de la Hoja de Patata', layout='wide')
+    apply_theme_styles(st.session_state.dark_mode)
     
+    # Toggle modo oscuro
+    st.sidebar.markdown("---")
+    dark_mode_toggle = st.sidebar.toggle(
+        "Modo claro / oscuro",
+        value=st.session_state.dark_mode,
+        key='dark_mode_toggle'
+    )
+    if dark_mode_toggle != st.session_state.dark_mode:
+        st.session_state.dark_mode = dark_mode_toggle
+        st.rerun()
+
     # Configuración multilenguaje en la barra lateral
     st.sidebar.title("Idioma/Language")
     

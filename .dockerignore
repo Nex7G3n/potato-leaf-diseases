@@ -1,0 +1,15 @@
+.git
+.gitignore
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+Potato Leaf Disease Dataset in Uncontrolled Environment/
+*.zip
+
+kaggle.json
+ngrok.exe
+
+results/reporte_enfermedades_patata.pdf
